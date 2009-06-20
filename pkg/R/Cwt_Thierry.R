@@ -72,8 +72,10 @@ cwtTh <- function(input, noctave, nvoice = 1, moments,
    dim(Ioutput) <- c(newsize,pp)
    if(twoD) {
      output <- Routput[1:isize,] + 1i*Ioutput[1:isize,]
-     if(plot) image(Mod(output),xlab="Time",ylab="log(scale)")
-     title("Wavelet Transform Modulus")
+     if(plot) { 
+       image(Mod(output),xlab="Time",ylab="log(scale)")
+       title("Wavelet Transform Modulus")
+     }
      output
    } 
    else {
