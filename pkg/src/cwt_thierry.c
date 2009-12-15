@@ -133,16 +133,20 @@ void Scwt_thierry(float *Rinput,float *Iinput,double *Oreal,
   nboctave = *pnboctave;
   nbvoice = *pnbvoice;
   inputsize = *pinputsize;
-  if(!(Ri2 = (double *)malloc(sizeof(double) * inputsize)))
-    error("Memory allocation failed for Ri2 in cwt_morlet.c \n");
-  if(!(Ri1 = (double *)malloc(sizeof(double) * inputsize)))
-    error("Memory allocation failed for Ri1 in cwt_morlet.c \n");
-  if(!(Ii1 = (double *)malloc(sizeof(double) * inputsize)))
-    error("Memory allocation failed for Ii1 in cwt_morlet.c \n");
-  if(!(Ri = (double *)malloc(sizeof(double) * inputsize)))
-    error("Memory allocation failed for Ri in cwt_morlet.c \n");
-  if(!(Ii = (double *)malloc(sizeof(double) * inputsize)))
-    error("Memory allocation failed for Ii in cwt_morlet.c \n");
+
+  /********* edit by xian,  Mon 14 Dec 2009 09:19:33 PM MST ****** 
+  Changing from malloc(sizeof(double) * inputsize) to R_alloc()
+  ******************** edit by xian *****/
+  if(!(Ri2 = (double *) R_alloc(inputsize, sizeof(double)) ))
+    error("Memory allocation failed for Ri2 in cwt_thierry.c \n");
+  if(!(Ri1 = (double *) R_alloc(inputsize, sizeof(double)) ))
+    error("Memory allocation failed for Ri1 in cwt_thierry.c \n");
+  if(!(Ii1 = (double *) R_alloc(inputsize, sizeof(double)) ))
+    error("Memory allocation failed for Ii1 in cwt_thierry.c \n");
+  if(!(Ri = (double *) R_alloc(inputsize, sizeof(double)) ))
+    error("Memory allocation failed for Ri in cwt_thierry.c \n");
+  if(!(Ii = (double *) R_alloc(inputsize, sizeof(double)) ))
+    error("Memory allocation failed for Ii in cwt_thierry.c \n");
 
   for(i = 0; i < inputsize; i++) {
     Ri[i] = (double)Rinput[i]; 
@@ -162,11 +166,13 @@ void Scwt_thierry(float *Rinput,float *Iinput,double *Oreal,
     }
   }
 
+  /********* edit by xian,  Mon 14 Dec 2009 09:19:33 PM MST ****** 
   free((char *)Ri2);
   free((char *)Ri1);
   free((char *)Ii1);
   free((char *)Ri);
   free((char *)Ii);
+  ******************** edit by xian *****/
 }
 
 

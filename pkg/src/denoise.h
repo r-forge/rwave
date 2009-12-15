@@ -274,7 +274,10 @@ void splint2(double xa[], double ya[], double y2a[], int n, double x,
    -------------------*/
 int find2power(int n);
 
+/******************* edit by xian Mon 14 Dec 2009 09:14:33 PM MST  ******
 void error(char *s);
+******************** edit by xian *****/
+
 
 
 
