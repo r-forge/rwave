@@ -56,12 +56,12 @@ int np;
 {
   int x, y;
 
-  if(!(*image = (float **) malloc( np * sizeof(float *) )))
+  if(!(*image = (float **) R_alloc( np , sizeof(float *) )))
     error("Memory allocation failed for *image in vector_op.c \n");
 
   for ( x = 0; x < np; x++ )
   {
-    if(!((*image)[x] = (float *) malloc( np * sizeof(float) )))
+    if(!((*image)[x] = (float *) R_alloc( np , sizeof(float) )))
       error("Memory allocation failed for *image in vector_op.c \n");
     for ( y = 0; y < np; y++ )
       (*image)[x][y] = f[x] * g[y];

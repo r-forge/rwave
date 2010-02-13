@@ -72,16 +72,16 @@ void signal_position(char *filtername, float **lambda,
   float d;
   int *indx;
 
-  if(!(indx = (int *) malloc(num_of_extrema * sizeof(int))))
+  if(!(indx = (int *) R_alloc(num_of_extrema , sizeof(int))))
     error("Memory allocation failed for indx in signal_position.c \n");
 
   HGfilter_bound(filtername,&H_bound,&G_bound,max_resoln); 
   PsiPhifilter_bound( &psi, &phi, H_bound, G_bound, max_resoln );
 
-  if(!(position_matrix = (float **) malloc(num_of_extrema * sizeof(float *) )))
+  if(!(position_matrix = (float **) R_alloc(num_of_extrema , sizeof(float *) )))
     error("Memory allocation failed for position matrix in image_lambda \n");
   for ( r = 0; r < num_of_extrema; r++ )
-    if(!(position_matrix[r] = (float *) malloc((num_of_extrema) * sizeof(float) )))
+    if(!(position_matrix[r] = (float *) R_alloc((num_of_extrema) , sizeof(float) )))
       error("Memory allocation failed for position_matrix[] in image_lambda \n");
 
   for ( r = 0; r < num_of_extrema; r++ ) {
@@ -104,17 +104,19 @@ void signal_position(char *filtername, float **lambda,
 /*  printf("num_of_extrema = %d \n",num_of_extrema); */
 /*  output_array(position_matrix,num_of_extrema,num_of_extrema,filename); */
 
+/*
   free( phi );
   free( psi );
+*/
 
   /**************************************************/
   /* solve lambda from position_matrix (lambda) = b */
   /**************************************************/
 
-  if(!(*lambda = (float *) malloc(num_of_extrema * sizeof(float) )))
+  if(!(*lambda = (float *) R_alloc(num_of_extrema , sizeof(float) )))
     error("Memory allocation failed for lambda in image_position.c \n");
 
-  if(!(b = (float *) malloc( num_of_extrema * sizeof(float))))
+  if(!(b = (float *) R_alloc( num_of_extrema , sizeof(float))))
     error("Memory allocation failed for b in image_position.c \n");  
 
 

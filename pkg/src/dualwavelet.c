@@ -31,15 +31,15 @@ void signal_W_tilda(float ***W_tilda, float **W, float **K,
   int t, i, j;
   char filename[STRING_SIZE];
   
-  if(!(p = (float *) malloc( np * sizeof(float) )))
+  if(!(p = (float *) R_alloc( np , sizeof(float) )))
     error("Memory allocation failed for p in image_W_tilda \n");
-  if(!(b = (float *) malloc( np * sizeof(float) )))
+  if(!(b = (float *) R_alloc( np , sizeof(float) )))
     error("Memory allocation failed for b in image_W_tilda \n");
-  if(!(*W_tilda = (float **) malloc( (max_resoln+1) * sizeof(float *) )))
+  if(!(*W_tilda = (float **) R_alloc( (max_resoln+1) , sizeof(float *) )))
     error("Memory allocation failed for *W_tilda in image_W_tilda \n");
 
   for(j = 1; j <= max_resoln; j++) {
-    if(!((*W_tilda)[j] = (float *) malloc( np * sizeof(float) )))
+    if(!((*W_tilda)[j] = (float *) R_alloc( np , sizeof(float) )))
       error("Memory allocation failed for (*W_tilda)[] in image_W_tilda \n");
   }
 
@@ -55,11 +55,13 @@ void signal_W_tilda(float ***W_tilda, float **W, float **K,
     output_signal((*W_tilda)[j], np, filename);
 
   }
+/*
   free( p );
   free( b );
   for(j = 0; j <= np; j++)
     free(K[j]);
   free(K);
+*/
 
   return;
 }
@@ -81,7 +83,7 @@ void signal_W_tilda_input(float ***W_tilda, int max_resoln, int np)
   int j;
   char filename[STRING_SIZE];
 
-  if(!(*W_tilda = (float **) malloc( (max_resoln+1) * sizeof(float *) )))
+  if(!(*W_tilda = (float **) R_alloc( (max_resoln+1) , sizeof(float *) )))
     error("Memory allocation failed for *W_tilda in signal_W_tilda \n");
 
 

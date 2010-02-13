@@ -67,15 +67,15 @@ void Scwt_DOG_r(float *input, double *Oreal, double *Oimage,
   nboctave = *pnboctave;
   nbvoice = *pnbvoice;
   inputsize = *pinputsize;
-  if(!(Ri2 = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ri2 = (double *)  R_alloc(inputsize, sizeof(double)) ))
     error("Memory allocation failed for Ri2 in cwt_DOG.c \n");
-  if(!(Ri1 = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ri1 = (double *)  R_alloc(inputsize, sizeof(double)) ))
     error("Memory allocation failed for Ri1 in cwt_DOG.c \n");
-  if(!(Ii1 = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ii1 = (double *)  R_alloc(inputsize, sizeof(double)) ))
     error("Memory allocation failed for Ii1 in cwt_DOG.c \n");
-  if(!(Ri = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ri = (double *)  R_alloc(inputsize, sizeof(double)) ))
     error("Memory allocation failed for Ri in cwt_DOG.c \n");
-  if(!(Ii = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ii = (double *)  R_alloc(inputsize, sizeof(double)) ))
     error("Memory allocation failed for Ii in cwt_DOG.c \n");
 
   for(i = 0; i < inputsize; i++) {
@@ -96,11 +96,6 @@ void Scwt_DOG_r(float *input, double *Oreal, double *Oimage,
     }
   }
 
-  free((char *)Ri2);
-  free((char *)Ri1);
-  free((char *)Ii1);
-  free((char *)Ri);
-  free((char *)Ii);
   return;
 }
 
@@ -135,15 +130,15 @@ void Scwt_DOG(float *Rinput,float *Iinput,double *Oreal,
   nboctave = *pnboctave;
   nbvoice = *pnbvoice;
   inputsize = *pinputsize;
-  if(!(Ri2 = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ri2 = (double *)  R_alloc(inputsize, sizeof(double)) ))
     error("Memory allocation failed for Ri2 in cwt_DOG.c \n");
-  if(!(Ri1 = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ri1 = (double *)  R_alloc(inputsize, sizeof(double)) ))
     error("Memory allocation failed for Ri1 in cwt_DOG.c \n");
-  if(!(Ii1 = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ii1 = (double *)  R_alloc(inputsize, sizeof(double)) ))
     error("Memory allocation failed for Ii1 in cwt_DOG.c \n");
-  if(!(Ri = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ri = (double *)  R_alloc(inputsize, sizeof(double)) ))
     error("Memory allocation failed for Ri in cwt_DOG.c \n");
-  if(!(Ii = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ii = (double *)  R_alloc(inputsize, sizeof(double)) ))
     error("Memory allocation failed for Ii in cwt_DOG.c \n");
 
   for(i = 0; i < inputsize; i++) {
@@ -164,11 +159,6 @@ void Scwt_DOG(float *Rinput,float *Iinput,double *Oreal,
     }
   }
 
-  free((char *)Ri2);
-  free((char *)Ri1);
-  free((char *)Ii1);
-  free((char *)Ri);
-  free((char *)Ii);
 }
 
 
@@ -195,15 +185,15 @@ void Svwt_DOG(float *Rinput,float *Iinput,double *Oreal,
   M = *pM;
   a = *pa;
   inputsize = *pinputsize;
-  if(!(Ri2 = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ri2 = (double *)  R_alloc(inputsize, sizeof(double)) ))
     error("Memory allocation failed for Ri2 in cwt_DOG.c \n");
-  if(!(Ri1 = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ri1 = (double *)  R_alloc(inputsize, sizeof(double)) ))
     error("Memory allocation failed for Ri1 in cwt_DOG.c \n");
-  if(!(Ii1 = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ii1 = (double *)  R_alloc(inputsize, sizeof(double)) ))
     error("Memory allocation failed for Ii1 in cwt_DOG.c \n");
-  if(!(Ri = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ri = (double *)  R_alloc(inputsize, sizeof(double)) ))
     error("Memory allocation failed for Ri in cwt_DOG.c \n");
-  if(!(Ii = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ii = (double *)  R_alloc(inputsize, sizeof(double)) ))
     error("Memory allocation failed for Ii in cwt_DOG.c \n");
 
   for(i = 0; i < inputsize; i++) {
@@ -217,11 +207,6 @@ void Svwt_DOG(float *Rinput,float *Iinput,double *Oreal,
   multi(Ri1,Ii1,Ri2,Oreal,Oimage,inputsize);
   double_fft(Oreal,Oimage,Oreal,Oimage,inputsize,1); 
   
-  free((char *)Ri2);
-  free((char *)Ri1);
-  free((char *)Ii1);
-  free((char *)Ri);
-  free((char *)Ii);
 }
 
 

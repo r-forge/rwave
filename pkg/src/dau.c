@@ -36,7 +36,7 @@ int max_resoln, np;
 {
   int j;
 
-  *d_phi_range = (bound *) malloc( (max_resoln+1) * sizeof(bound) );
+  *d_phi_range = (bound *) R_alloc( (max_resoln+1) , sizeof(bound) );
   for ( j = 0; j <= max_resoln; j++ )
   {
     (*d_phi_range)[j].lb = (int) ceil((1 - 1.0 / twoto[j]) * (1 - 2*NW));
@@ -57,7 +57,7 @@ int np;
 {
   int j;
 
-  *d_psi_range = (bound *) malloc( (max_resoln+1) * sizeof(bound) );
+  *d_psi_range = (bound *) R_alloc( (max_resoln+1) , sizeof(bound) );
   for ( j = 1; j <= max_resoln; j++ )
   {
     (*d_psi_range)[j].lb = (int) ceil( (double) ((d_phi_range[j-1].lb -1) / 2) );
@@ -81,7 +81,7 @@ int max_resoln;
 
   for ( j = 0; j <= max_resoln; j++ )
   {
-    d_phi[j] = (float *) malloc( d_phi_range[j].size * sizeof(float) );
+    d_phi[j] = (float *) R_alloc( d_phi_range[j].size , sizeof(float) );
 		
     if ( j == 0 )
       for ( k = d_phi_range[j].lb; k <= d_phi_range[j].ub; k++ )
@@ -117,7 +117,7 @@ int max_resoln;
 
   for ( j = 1; j <= max_resoln; j++ )
   {
-    d_psi[j] = (float *) malloc( d_psi_range[j].size * sizeof( float ) );
+    d_psi[j] = (float *) R_alloc( d_psi_range[j].size , sizeof( float ) );
 		
     for ( k = d_psi_range[j].lb; k <= d_psi_range[j].ub; k++ )
     {
@@ -224,9 +224,9 @@ int *np_ptr;
   compute_a();
   init_twoto( max_resoln );
 
-  d_psi_range = (bound *) malloc( num_of_resoln * sizeof(bound) );
-  d_phi = (float **) malloc( num_of_resoln * sizeof(float *) );
-  d_psi = (float **) malloc( num_of_resoln * sizeof(float *) );
+  d_psi_range = (bound *) R_alloc( num_of_resoln , sizeof(bound) );
+  d_phi = (float **) R_alloc( num_of_resoln , sizeof(float *) );
+  d_psi = (float **) R_alloc( num_of_resoln , sizeof(float *) );
 
   init_phi_array( &phi_array, max_resoln );
   init_psi_array( &psi_array, max_resoln );
@@ -240,6 +240,7 @@ int *np_ptr;
   phi_reconstruction( phi, d_phi, phi_array, d_phi_range, max_resoln, np );
   psi_reconstruction( psi, d_psi, psi_array, d_psi_range, max_resoln, np );
 
+/*
   free( twoto );
   free( phi_array );
   free( psi_array );
@@ -256,6 +257,7 @@ int *np_ptr;
   for ( j = NMIN; j < NMAX + 1; j++ )
     free( c[j] );
   free( c );
+*/
 }
 
 /****************************************************************************/
@@ -275,7 +277,7 @@ int max_resoln;
   int j;
   int temp = 2*NW-1;
 
-  *dH_bound = (bound *) malloc( max_resoln * sizeof(bound) );
+  *dH_bound = (bound *) R_alloc( max_resoln , sizeof(bound) );
 
   for ( j = 0; j < max_resoln; j++ )
   {
@@ -301,7 +303,7 @@ int max_resoln;
   int j;
   int temp = 2 - 2*NW;
 
-  *dG_bound = (bound *) malloc( max_resoln * sizeof(bound) );
+  *dG_bound = (bound *) R_alloc( max_resoln , sizeof(bound) );
 
   for ( j = 0; j < max_resoln; j++ )
   {
@@ -327,10 +329,10 @@ int max_resoln;
 {
   int j, i;
 
-  *dH = (float **) malloc( max_resoln * sizeof(float *) );
+  *dH = (float **) R_alloc( max_resoln , sizeof(float *) );
   for ( j = 0; j < max_resoln; j++ )
   {
-    (*dH)[j] = (float *) malloc( dH_bound[j].size * sizeof(float) );
+    (*dH)[j] = (float *) R_alloc( dH_bound[j].size , sizeof(float) );
     if ( j == 0 )
     {
       for ( i = 0; i < dH_bound[j].size; i++ )
@@ -364,10 +366,10 @@ int max_resoln;
 {
   int j, i, n;
 
-  *dG = (float **) malloc( max_resoln * sizeof(float *) );
+  *dG = (float **) R_alloc( max_resoln , sizeof(float *) );
   for ( j = 0; j < max_resoln; j++ )
   {
-    (*dG)[j] = (float *) malloc( dG_bound[j].size * sizeof(float) );
+    (*dG)[j] = (float *) R_alloc( dG_bound[j].size , sizeof(float) );
     if ( j == 0 )
     { 
       for ( i = 0, n = 2-2*NW; i < dG_bound[j].size; i++, n++ )
@@ -406,7 +408,7 @@ int *NW_ptr;
 
   bound *dH_bound, *dG_bound;
   float **dH, **dG;
-  float *sym = (float *) malloc( 2*np * sizeof(float) );
+  float *sym = (float *) R_alloc( 2*np , sizeof(float) );
   int j, n, k, t;
   float sum;
 
@@ -448,6 +450,7 @@ int *NW_ptr;
     }
   }
 
+/*
   free( twoto );
   free( sym );
   free( dH_bound );
@@ -462,5 +465,6 @@ int *NW_ptr;
   for ( j = NMIN; j < NMAX + 1; j++ )
     free( c[j] );
   free( c );
+*/
 }
 
