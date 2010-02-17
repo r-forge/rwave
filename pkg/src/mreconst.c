@@ -137,6 +137,7 @@ void signal_position(char *filtername, float **lambda,
   svdecomp_solve(position_matrix,b,*lambda,num_of_extrema,
 		 num_of_extrema,&w,&v);
 
+/*
   for ( i = 0; i < num_of_extrema; i++ ) {
     free(position_matrix[i] );
     free(v[i]); 
@@ -146,6 +147,7 @@ void signal_position(char *filtername, float **lambda,
   free(v);
   free(w);
   free(b);
+*/
 
   return;
 }
@@ -201,9 +203,10 @@ void extrema_reconst(char *filtername, float *f, float *extrema,
   
   signal_penalty_function(f,lambda,W_tilda,ext,num_of_extrema,np);    
 
+
+  /*
   free( lambda );
   free( ext );
-  /*
     for ( j = 0; j <= max_resoln; j++ )  {
     free( W[j] );
     free S[j] );

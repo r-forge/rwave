@@ -6,7 +6,7 @@
 #              All right reserved
 ########################################################################
 
-mrecons <- function(extrema, filtername="Gaussian1", readflag=TRUE)
+mrecons <- function(extrema, filtername="Gaussian1", readflag=FALSE)
 #****************************************************************
 #  mrecons
 #  --------
@@ -112,7 +112,3 @@ dwinverse <- function(wt, filtername="Gaussian1")
   f <- z$a 
   f
 }
-
-
-
-

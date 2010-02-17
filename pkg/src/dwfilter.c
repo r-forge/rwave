@@ -132,7 +132,7 @@ void Gfilter_compute(filtername,G,G_bound,max_resoln)
 ****************************************************************/
 
 
-void HGfilter_bound(filtername,H_bound,G_bound,max_resoln )
+void HGfilter_bound(filtername, H_bound,G_bound,max_resoln )
      char *filtername;
      bound **H_bound, **G_bound;
      int max_resoln;
@@ -685,13 +685,14 @@ void PsiPhifilter_bound(psi,phi,H_bound,G_bound,max_resoln)
 *    np: signal size
 *
 ****************************************************************/
-
+//??
 void signal_W_S(W,S,max_resoln,np)
      float ***W, ***S;
      int max_resoln, np;
 {
   int j, m, n, t;
-  char filename1[STRING_SIZE],filename2[STRING_SIZE],filtername[STRING_SIZE];
+  char filename1[STRING_SIZE],filename2[STRING_SIZE];
+  char * filtername[STRING_SIZE];
   bound *H_bound,*G_bound;
   float **H_filter,**G_filter;
   float **H;
@@ -709,10 +710,11 @@ void signal_W_S(W,S,max_resoln,np)
   if(!(temp = (float *) R_alloc( np , sizeof(float) )))
     error("Memory allocation failed for temp in oneD_filter.c \n");
 
-  filename_given(filtername,"Gaussian1");
-  HGfilter_bound(filtername,&H_bound,&G_bound,max_resoln );  
-  Hfilter_compute(filtername,&H_filter, H_bound, max_resoln );
-  Gfilter_compute(filtername,&G_filter, G_bound, max_resoln);
+  *filtername = "Gaussian1";
+  //filename_given(filtername,"Gaussian1");
+  HGfilter_bound(*filtername, &H_bound,&G_bound,max_resoln );  
+  Hfilter_compute(*filtername,&H_filter, H_bound, max_resoln );
+  Gfilter_compute(*filtername,&G_filter, G_bound, max_resoln);
 /*  printf("Using Gaussian1 filter \n"); */
 
   for ( j = 0; j < max_resoln; j++ )   {
@@ -833,7 +835,8 @@ void signal_W_hat_S_hat(W_hat,S_hat,max_resoln,np)
      int max_resoln; 
      int np;
 {
-  char filename1[STRING_SIZE],filename2[STRING_SIZE],filtername[STRING_SIZE];
+  char filename1[STRING_SIZE],filename2[STRING_SIZE];
+  char * filtername[STRING_SIZE];
   int two_np;
   float *prev, *curr, **H_hat, **G_hat;
   int j, m;
@@ -844,8 +847,9 @@ void signal_W_hat_S_hat(W_hat,S_hat,max_resoln,np)
   if(!(curr = (float *) R_alloc( two_np , sizeof(float) )))
      error("Memory allocation failed for curr in oneD_filter.c \n");
 
-  filename_given(filtername,"Gaussian1");
-  HG_hat_compute(filtername,&H_hat,&G_hat,max_resoln,np);
+  *filtername = "Gaussian1";
+  //filename_given(filtername,"Gaussian1");
+  HG_hat_compute(*filtername,&H_hat,&G_hat,max_resoln,np);
 /*  printf("computing W_hat & S_hat with Gaussian1 filter\n");  */
 
   if(!(*W_hat = (float **) R_alloc( (max_resoln+1) , sizeof(float) )))

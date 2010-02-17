@@ -1,3 +1,4 @@
+#include "Swave.h"
 
 
 /***************************************************************
@@ -8,15 +9,20 @@
 *                 All right reserved                           *
 ***************************************************************/
 /* Numeric Recipe of C */
-
 #define M 7
 #define NSTACK 50
 #define FM 7875
 #define FA 211
 #define FC 1663
 
-void qcksrt(int n,float arr[])
+void qcksrt(int n, double arr[])
 {
+    //double *x;
+    //x = &arr;
+   // R_rsort(arr, n);
+    //*arr = x;
+//}
+//{
   int l=1,jstack=0,j,ir,iq,i;
   int istack[NSTACK+1];
   long int fx=0L;

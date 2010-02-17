@@ -7,7 +7,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
-#include "R.h"
+#include <R.h>
 
 #ifndef Macintosh
 #include <sys/file.h>
