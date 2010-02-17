@@ -200,7 +200,7 @@ void extrema_reconst(char *filtername, float *f, float *extrema,
   signal_penalty_function(f,lambda,W_tilda,ext,num_of_extrema,np);    
 
   free( lambda );
-  free( ext );
+  //free( ext );
   /*
     for ( j = 0; j <= max_resoln; j++ )  {
     free( W[j] );

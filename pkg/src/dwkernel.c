@@ -131,8 +131,8 @@ void signal_K_compute(K,W,max_resoln,np )
 /*  
   output_array( *K, np,np,"signal_K_matrix" );
 */
-  for(i = 0; i <= max_resoln; i++)
-    free( grad_W[i]);
+  //for(i = 0; i <= max_resoln; i++)
+//    free( grad_W[i]);
   
   free(grad_W);
   free(k_tilda );
