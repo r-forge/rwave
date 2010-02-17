@@ -149,11 +149,11 @@ void choldc(float **a, int n, float p[])
 /*  if(!(A = (float **)(malloc(sizeof(float *) * (n+1)))))
     error("Memory allocation failed for A in choldc.c \n");
 */
-  if(!(P = (float *)(R_alloc((n+1), sizeof(float)))))
+  if(!(P = (float *)(malloc(sizeof(float) * (n+1)))))
     error("Memory allocation failed for P in choldc.c \n");
 /*		  
   for(i = 0; i <= n; i++) {
-    if(!(A[i] = (float *)(R_alloc((n+1), sizeof(float)))))
+    if(!(A[i] = (float *)(malloc(sizeof(float) * (n+1)))))
       error("Memory allocation failed for A in choldc.c \n");
   }
 */  
@@ -177,7 +177,7 @@ void choldc(float **a, int n, float p[])
     free(A[i]);
   }
 */
-  /* free(P); */ 
+  free(P);
 /*  free(A); */
 }
 
@@ -211,15 +211,15 @@ void cholsl(float **a, int n, float p[], float b[], float x[])
 /*  if(!(A = (float **)(malloc(sizeof(float *) * (n+1)))))
     error("Memory allocation failed for A in choldc.c \n");
 */
-  if(!(P = (float *)(R_alloc((n+1), sizeof(float)))))
+  if(!(P = (float *)(malloc(sizeof(float) * (n+1)))))
     error("Memory allocation failed for P in choldc.c \n");
-  if(!(B = (float *)(R_alloc((n+1), sizeof(float)))))
+  if(!(B = (float *)(malloc(sizeof(float) * (n+1)))))
     error("Memory allocation failed for B in choldc.c \n");
-  if(!(X = (float *)(R_alloc((n+1), sizeof(float)))))
+  if(!(X = (float *)(malloc(sizeof(float) * (n+1)))))
     error("Memory allocation failed for X in choldc.c \n");
 		  
 /*  for(i = 0; i <= n; i++) {
-    if(!(A[i] = (float *)(R_alloc((n+1), sizeof(float)))))
+    if(!(A[i] = (float *)(malloc(sizeof(float) * (n+1)))))
       error("Memory allocation failed for A in choldc.c \n");
   }
 */
@@ -248,10 +248,11 @@ void cholsl(float **a, int n, float p[], float b[], float x[])
 /*  for(i = 0; i <= n; i++) {
     free(A[i]);
   }
+*/
   free(P);
   free(B);
   free(X);
-  free(A); */
+/*  free(A); */
 }
 
 
@@ -271,7 +272,7 @@ float *d;
   float big,dum,sum,temp;
   float *vv;
   
-  if(!(vv=(float *) R_alloc( (n+1) , sizeof(float) )))
+  if(!(vv=(float *) malloc( (n+1) * sizeof(float) )))
     error("Memory allocation failed for vv in choldc.c \n");
   
   *d=1.0;
@@ -315,7 +316,7 @@ float *d;
       for (i=j+1;i<=n;i++) a[i][j] *= dum;
     }
   }
-  /* free( vv ); */ 
+  free( vv );
 }
 #undef TINY
 #undef NRANSI

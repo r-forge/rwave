@@ -173,15 +173,15 @@ void Scwt_morlet_r(float *input, double *Oreal, double *Oimage,
   nboctave = *pnboctave;
   nbvoice = *pnbvoice;
   inputsize = *pinputsize;
-  if(!(Ri2 = (double *)  R_alloc(inputsize, sizeof(double)) ))
+  if(!(Ri2 = (double *)malloc(sizeof(double) * inputsize)))
     error("Memory allocation failed for Ri2 in cwt_morlet.c \n");
-  if(!(Ri1 = (double *)  R_alloc(inputsize, sizeof(double)) ))
+  if(!(Ri1 = (double *)malloc(sizeof(double) * inputsize)))
     error("Memory allocation failed for Ri1 in cwt_morlet.c \n");
-  if(!(Ii1 = (double *)  R_alloc(inputsize, sizeof(double)) ))
+  if(!(Ii1 = (double *)malloc(sizeof(double) * inputsize)))
     error("Memory allocation failed for Ii1 in cwt_morlet.c \n");
-  if(!(Ri = (double *)  R_alloc(inputsize, sizeof(double)) ))
+  if(!(Ri = (double *)malloc(sizeof(double) * inputsize)))
     error("Memory allocation failed for Ri in cwt_morlet.c \n");
-  if(!(Ii = (double *)  R_alloc(inputsize, sizeof(double)) ))
+  if(!(Ii = (double *)malloc(sizeof(double) * inputsize)))
     error("Memory allocation failed for Ii in cwt_morlet.c \n");
 
   for(i = 0; i < inputsize; i++) {
@@ -202,6 +202,11 @@ void Scwt_morlet_r(float *input, double *Oreal, double *Oimage,
     }
   }
 
+  free((char *)Ri2);
+  free((char *)Ri1);
+  free((char *)Ii1);
+  free((char *)Ri);
+  free((char *)Ii);
   return;
 }
 
@@ -236,15 +241,15 @@ void Scwt_morlet(float *Rinput,float *Iinput,double *Oreal,
   nboctave = *pnboctave;
   nbvoice = *pnbvoice;
   inputsize = *pinputsize;
-  if(!(Ri2 = (double *)  R_alloc(inputsize, sizeof(double)) ))
+  if(!(Ri2 = (double *)malloc(sizeof(double) * inputsize)))
     error("Memory allocation failed for Ri2 in cwt_morlet.c \n");
-  if(!(Ri1 = (double *)  R_alloc(inputsize, sizeof(double)) ))
+  if(!(Ri1 = (double *)malloc(sizeof(double) * inputsize)))
     error("Memory allocation failed for Ri1 in cwt_morlet.c \n");
-  if(!(Ii1 = (double *)  R_alloc(inputsize, sizeof(double)) ))
+  if(!(Ii1 = (double *)malloc(sizeof(double) * inputsize)))
     error("Memory allocation failed for Ii1 in cwt_morlet.c \n");
-  if(!(Ri = (double *)  R_alloc(inputsize, sizeof(double)) ))
+  if(!(Ri = (double *)malloc(sizeof(double) * inputsize)))
     error("Memory allocation failed for Ri in cwt_morlet.c \n");
-  if(!(Ii = (double *)  R_alloc(inputsize, sizeof(double)) ))
+  if(!(Ii = (double *)malloc(sizeof(double) * inputsize)))
     error("Memory allocation failed for Ii in cwt_morlet.c \n");
 
   for(i = 0; i < inputsize; i++) {
@@ -265,6 +270,11 @@ void Scwt_morlet(float *Rinput,float *Iinput,double *Oreal,
     }
   }
 
+  free((char *)Ri2);
+  free((char *)Ri1);
+  free((char *)Ii1);
+  free((char *)Ri);
+  free((char *)Ii);
 }
 
 
@@ -291,15 +301,15 @@ void Svwt_morlet(float *Rinput,float *Iinput,double *Oreal,
   centerfrequency = *pcenterfrequency;
   a = *pa;
   inputsize = *pinputsize;
-  if(!(Ri2 = (double *)  R_alloc(inputsize, sizeof(double)) ))
+  if(!(Ri2 = (double *)malloc(sizeof(double) * inputsize)))
     error("Memory allocation failed for Ri2 in cwt_morlet.c \n");
-  if(!(Ri1 = (double *)  R_alloc(inputsize, sizeof(double)) ))
+  if(!(Ri1 = (double *)malloc(sizeof(double) * inputsize)))
     error("Memory allocation failed for Ri1 in cwt_morlet.c \n");
-  if(!(Ii1 = (double *)  R_alloc(inputsize, sizeof(double)) ))
+  if(!(Ii1 = (double *)malloc(sizeof(double) * inputsize)))
     error("Memory allocation failed for Ii1 in cwt_morlet.c \n");
-  if(!(Ri = (double *)  R_alloc(inputsize, sizeof(double)) ))
+  if(!(Ri = (double *)malloc(sizeof(double) * inputsize)))
     error("Memory allocation failed for Ri in cwt_morlet.c \n");
-  if(!(Ii = (double *)  R_alloc(inputsize, sizeof(double)) ))
+  if(!(Ii = (double *)malloc(sizeof(double) * inputsize)))
     error("Memory allocation failed for Ii in cwt_morlet.c \n");
 
   for(i = 0; i < inputsize; i++) {
@@ -313,6 +323,11 @@ void Svwt_morlet(float *Rinput,float *Iinput,double *Oreal,
   multi(Ri1,Ii1,Ri2,Oreal,Oimage,inputsize);
   double_fft(Oreal,Oimage,Oreal,Oimage,inputsize,1); 
   
+  free((char *)Ri2);
+  free((char *)Ri1);
+  free((char *)Ii1);
+  free((char *)Ri);
+  free((char *)Ii);
 }
 
 

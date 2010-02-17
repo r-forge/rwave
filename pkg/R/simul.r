@@ -17,10 +17,6 @@ mnpval <- function(inputdata, maxresoln, wl=128, scale=FALSE)
   s <- x$signal
   np <- x$length
   num.of.windows <- (np/wl - 1) * 4 + 1
-  if ((num.of.windows) < 1 ) { 
-    stop("window size too large")
-  }
-    
 
   pval <- matrix(0, nrow=maxresoln, ncol=np)
   pval <- t(pval)
@@ -52,9 +48,6 @@ mbpval <- function(inputdata, maxresoln, wl=128, scale=FALSE)
   s <- x$signal
   np <- x$length
   num.of.windows <- (np/wl - 1) * 4 + 1
-  if ((num.of.windows) < 1 ) { 
-    stop("window size too large")
-  }
 
   pval <- matrix(0, nrow=maxresoln, ncol=np)
   pval <- t(pval)

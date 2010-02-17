@@ -37,13 +37,13 @@ void Sf_compute(float *Sf, float *f, int *max_resoln_ptr,
   int j, n, k, offset;
   bound *H_bound, *G_bound;
   float **H, sum;
-  //char filtername;
+  char *filtername;
 
 
-  //filtername = *pfiltername;
+  filtername = *pfiltername;
 
-  HGfilter_bound(*pfiltername,&H_bound,&G_bound,max_resoln);
-  Hfilter_compute(*pfiltername,&H,H_bound,max_resoln);
+  HGfilter_bound(filtername,&H_bound,&G_bound,max_resoln);
+  Hfilter_compute(filtername,&H,H_bound,max_resoln);
 
   for ( j = 0; j <= max_resoln; j++ )  {
     if ( j == 0 )     { /* Sf[0] = original signal f  */
@@ -60,12 +60,10 @@ void Sf_compute(float *Sf, float *f, int *max_resoln_ptr,
     }
   }
   
-/*
   for ( j = 0; j < max_resoln; j++ )
     free( H[j] );
   free( H );
   free( H_bound );
-*/
 }
 
 
@@ -90,13 +88,13 @@ void Wf_compute(float *Wf, float *Sf, int *max_resoln_ptr,
   int max_resoln = *max_resoln_ptr;
   int np = *np_ptr;
   int j, n, k, offset;
-  //char *filtername;
+  char *filtername;
   bound *G_bound, *H_bound;
   float **G, sum;
 
-  //filtername = pfiltername;
-  HGfilter_bound(*pfiltername, &H_bound, &G_bound, max_resoln );
-  Gfilter_compute(*pfiltername, &G, G_bound, max_resoln );
+  filtername = *pfiltername;
+  HGfilter_bound(filtername,&H_bound, &G_bound, max_resoln );
+  Gfilter_compute(filtername,&G, G_bound, max_resoln );
   	
   for ( j = 1; j <= max_resoln; j++ )  {
     offset = (j-1)*np;
@@ -108,12 +106,10 @@ void Wf_compute(float *Wf, float *Sf, int *max_resoln_ptr,
     }					       
   }
   
-/*
   for ( j = 0; j < max_resoln; j++ )
     free( G[j] );
   free( G );
   free( G_bound );
-*/
 }
 
 

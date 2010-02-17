@@ -35,7 +35,7 @@ void input_signal(fname,Pic,size)
     printf("Can't open file %s\n", fname);
   }
 
-  if(!(*Pic = (float *) R_alloc(size, sizeof(float) )))
+  if(!(*Pic = (float *)malloc(sizeof(float) * size)))
     error("Memory allocation failed for *Pic in input.c \n");
 
   for(k = 0; k < size; k++){

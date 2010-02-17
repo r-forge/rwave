@@ -87,13 +87,13 @@ void signal_K_compute(K,W,max_resoln,np )
   float **grad_W, *k_tilda;
   float fexp2();
 
-  if(!(grad_W = (float **) R_alloc( (max_resoln+1) , sizeof(float *) )))
+  if(!(grad_W = (float **) malloc( (max_resoln+1) * sizeof(float *) )))
     error("Memory allocation failed for grad_pis in K_compute.c \n");
-  if(!(k_tilda = (float *) R_alloc( np , sizeof(float) )))
+  if(!(k_tilda = (float *) malloc( np * sizeof(float) )))
     error("Memory allocation failed for k_tilda in K_compute.c \n");
   
   for(i = 1; i <= max_resoln; i++)
-    if(!(grad_W[i] = (float *)R_alloc(np , sizeof(float))))
+    if(!(grad_W[i] = (float *)malloc(np * sizeof(float))))
       error("Memory allocation failed for grad_W[] in K_compute.c \n");
 
 
@@ -117,10 +117,10 @@ void signal_K_compute(K,W,max_resoln,np )
   /* k_tilda is one dimensional ...                             */
   /**************************************************************/
 
-  if(!((*K)=(float **) R_alloc( (np+1) , sizeof(float *))))
+  if(!((*K)=(float **) malloc( (np+1) * sizeof(float *))))
     error("Memory allocation failed for *k in K_compute.c \n");
   for ( t = 0; t <= np; t++ )
-    if(!((*K)[t] = (float *) R_alloc( (np+1) , sizeof(float) )))
+    if(!((*K)[t] = (float *) malloc( (np+1) * sizeof(float) )))
       error("Memory allocation failed for (*k)[] in K_compute.c \n");
   
   for ( t = 0; t < np; t++ )    {
@@ -131,14 +131,11 @@ void signal_K_compute(K,W,max_resoln,np )
 /*  
   output_array( *K, np,np,"signal_K_matrix" );
 */
-
-/*
   for(i = 0; i <= max_resoln; i++)
     free( grad_W[i]);
   
   free(grad_W);
   free(k_tilda );
-*/
 }
 
 /****************************************************************
@@ -164,7 +161,7 @@ void signal_tilda_adjust(tilda,ksize,fname,fsize)
   int i, j, k, l, m, n;
   int rsize, middle, rest;
   
-  if(!(*tilda = (float *)R_alloc(ksize, sizeof(float))))
+  if(!(*tilda = (float *)malloc(sizeof(float) * ksize)))
     error("Memory allocation failed for *tilda in K_op.c \n");
   signal_zero(*tilda, ksize);
 
@@ -179,6 +176,7 @@ void signal_tilda_adjust(tilda,ksize,fname,fsize)
     m = ksize -  i;
     (*tilda)[m] = tmp[k];
   }
+  free(tmp);
 }
 
 

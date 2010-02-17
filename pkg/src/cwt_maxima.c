@@ -7,6 +7,9 @@
 *                 Princeton University                         *
 *                 All right reserved                           *
 ***************************************************************/
+
+
+#define MAX(x,y) ((x)>(y) ? (x) : (y))
 #include "Swave.h"
 
 
@@ -35,7 +38,7 @@ Scwt_gmax(input, output, pnrow, pncol, posvector)
     tmp = -99999999.0;
     pos = -1;
     for(j = 0; j < ncol; j++) {
-      tmp = max(tmp, input[j * nrow + i]);
+      tmp = MAX(tmp, input[j * nrow + i]);
       if(tmp == input[j * nrow + i]) pos = j;
     }
     posvector[i] = pos;

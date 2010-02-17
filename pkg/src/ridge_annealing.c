@@ -73,10 +73,10 @@ void Sridge_annealing(float *cost, double *smodulus,
 
   recal = 1000000; /* recompute cost function every 'recal' iterations */
 
-  if(!(bcost = (float *)R_alloc(blocksize, sizeof(float) )))
+  if(!(bcost = (float *)malloc(sizeof(float) * blocksize)))
     error("Memory allocation failed for bcost at ridge_annealing.c \n");
 
-  if(!(phi2 = (float *)R_alloc((smodsize+1)*sub,sizeof(float))))
+  if(!(phi2 = (float *)calloc((smodsize+1)*sub,sizeof(float))))
     error("Memory allocation failed for phi2 at ridge_annealing.c \n");
 
 /*
@@ -244,7 +244,7 @@ void Sridge_annealing(float *cost, double *smodulus,
 	  for(i=0;i<sigsize;i++) phi[i]=phi2[i];
 	  /* splridge(1, phi, smodsize, phi2);
 	  for(i=0;i<sigsize;i++) phi[i]=phi2[i];*/
-	  /* free((char *)bcost); */
+	  free((char *)bcost);
 	  return;
 	}
       }
@@ -269,7 +269,7 @@ void Sridge_annealing(float *cost, double *smodulus,
 	for(i=0;i<sigsize;i++) phi[i]=phi2[i];
 	/* splridge(1, phi, smodsize, phi2);
 	for(i=0;i<sigsize;i++) phi[i]=phi2[i];*/
-	/* free((char *)bcost); */ 
+	free((char *)bcost);
 	printf("Done !\n");
 	return;
       }
