@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 
 /*******************************************************************
 *              (c) Copyright  1997                                 *
@@ -15,7 +17,7 @@
 /****************************************************************
 *  Function: input_signal:
 *  -----------------------
-*  Read a string of floating number.
+*  Read a string of doubleing number.
 *
 *    fname: filename
 *    Pic: place to store
@@ -25,17 +27,17 @@
 void input_signal(fname,Pic,size)
      char *fname;
      int size;
-     float **Pic;
+     double **Pic;
 {
   FILE *fp;
   int k;
-  float tmp;
+  double tmp;
   
   if ((fp = fopen(fname,"r")) == NULL) {
     printf("Can't open file %s\n", fname);
   }
 
-  if(!(*Pic = (float *)malloc(sizeof(float) * size)))
+  if(!(*Pic = (double *)malloc(sizeof(double) * size)))
     error("Memory allocation failed for *Pic in input.c \n");
 
   for(k = 0; k < size; k++){
@@ -144,7 +146,7 @@ filename_inc(filename, inc)
 
 void output_signal( s, np, fname)
      char *fname;
-     float *s;
+     double *s;
      int np;
 {
   FILE *fp;
@@ -162,9 +164,9 @@ void output_signal( s, np, fname)
 /****************************************************************
 *  Function: output_array:
 *  -----------------------
-*  Output array of floating numbers
+*  Output array of doubleing numbers
 *  
-*  array: floating numbers
+*  array: doubleing numbers
 *  nrow: number of row in array
 *  ncol: number of column in array
 *  file_name: filename for output
@@ -173,7 +175,7 @@ void output_signal( s, np, fname)
 
 
 void output_array( array, nrow, ncol, file_name )
-     float **array;
+     double **array;
      int nrow, ncol;
      char *file_name;
 {

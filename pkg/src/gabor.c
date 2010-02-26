@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 /****************************************************************
 *               (c) Copyright  1997                             *
 *                          by                                   *
@@ -23,7 +25,7 @@
 *
 ************************************************************/
 
-void gabor_frequency(float sigma,float frequency,double *w,int isize)
+void gabor_frequency(double sigma,double frequency,double *w,int isize)
 {
   double tmp, tmp1;
   int i;
@@ -58,13 +60,13 @@ void gabor_frequency(float sigma,float frequency,double *w,int isize)
 *
 ***********************************************************/
 
-void Sgabor(float *input,double *Oreal,double *Oimage,int *pnbfreq,
-       float *pfreqstep,int *pinputsize,float *pscale)
+void Sgabor(double *input,double *Oreal,double *Oimage,int *pnbfreq,
+       double *pfreqstep,int *pinputsize,double *pscale)
 {
 /*  void multiply();
   void FFT();*/
   int nbfreq, i, j, k, inputsize;
-  float scale, freqstep, frequency;
+  double scale, freqstep, frequency;
   double *Ri2, *Ri1, *Ii1, *Ii2, *Ii, *Ri;
 
 
@@ -144,13 +146,13 @@ void Sgabor(float *input,double *Oreal,double *Oimage,int *pnbfreq,
 *
 ************************************************************/
 
-void Svgabor(float *input,double *Oreal,double *Oimage,float *pfreq,
-	int *pinputsize,float *pscale)
+void Svgabor(double *input,double *Oreal,double *Oimage,double *pfreq,
+	int *pinputsize,double *pscale)
 {
 /*  void multiply();
   void FFT();*/
   int i, j, k, inputsize;
-  float scale, freqstep, frequency;
+  double scale, freqstep, frequency;
   double *Ri2, *Ri1, *Ii1, *Ii2, *Ii, *Ri;
 
 
@@ -220,11 +222,11 @@ void Svgabor(float *input,double *Oreal,double *Oimage,float *pfreq,
 *         array starting at 1, for compatibility with S. 
 ***************************************************************/
 
-void gabor_time(float *pfrequency,float *pscale, int *pb, 
+void gabor_time(double *pfrequency,double *pscale, int *pb, 
 		 double *g_r, double *g_i,int *pisize)
 {
   double tmp, tmp2;
-  float frequency = *pfrequency, scale = *pscale;
+  double frequency = *pfrequency, scale = *pscale;
   int b = *pb, isize = *pisize;
   int i;
   double pi;
@@ -258,11 +260,11 @@ void gabor_time(float *pfrequency,float *pscale, int *pb,
 *         array starting at 1, for compatibility with S. 
 ***************************************************************/
 
-void vgabor_time(float *frequency,float *pscale, int *b, 
+void vgabor_time(double *frequency,double *pscale, int *b, 
 		 double *g_r, double *g_i,int *pisize, int *pnbnode)
 {
   double tmp, tmp2;
-  float scale = *pscale;
+  double scale = *pscale;
   int isize = *pisize;
   int i, j, nbnode = *pnbnode;
   double pi;

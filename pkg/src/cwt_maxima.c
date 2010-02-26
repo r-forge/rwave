@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 /***************************************************************
 *    $Log: cwt_maxima.c,v $                                    *
 ****************************************************************
@@ -62,7 +64,7 @@ Scwt_mridge(input, output, pnrow, pncol)
 {
   int nrow, ncol, i, j;
   int pos;
-  float tmp;
+  double tmp;
 
   nrow = *pnrow;
   ncol = *pncol;

@@ -50,8 +50,8 @@ typedef struct
   int resoln;
   int x; 
   int y; 
-  float W1f; 
-  float W2f; 
+  double W1f; 
+  double W2f; 
 } image_ext;
 */
 
@@ -61,7 +61,7 @@ extern int nint();
 extern double log2();
 extern double exp2();
 extern int iexp2();
-extern float fexp2();
+extern double fexp2();
 extern int find2power();
 
 /* uniform random number generator */

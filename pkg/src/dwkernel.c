@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 
 /*******************************************************************/
 /*              (c) Copyright  1997                                */
@@ -12,21 +14,21 @@
 /****************************************************************
 *  Function: fexp2:
 *  ----------------
-*  returning a float number of power of 2^j
+*  returning a double number of power of 2^j
 *
 *    j: exponent
 *
 ****************************************************************/
 
 /* 2^j  (j can be >= 0 or < 0 ) */
-float fexp2(j)
+double fexp2(j)
   int j;
 {
   int k;
-  float s;
+  double s;
   s = 1.0;
   if (j >= 0) {
-    return( (float)(1 << j));
+    return( (double)(1 << j));
   }
   else {
     for (k = j; k < 0 ; k++)
@@ -48,8 +50,8 @@ float fexp2(j)
 ****************************************************************/
 
 void wavelet_transform_gradient( grad, s, max_resoln, np )
-     float **grad;
-     float **s;
+     double **grad;
+     double **s;
      int max_resoln;
      int np;
 {
@@ -77,23 +79,23 @@ void wavelet_transform_gradient( grad, s, max_resoln, np )
 
 
 void signal_K_compute(K,W,max_resoln,np )
-     float ***K;
-     float **W;
+     double ***K;
+     double **W;
      int max_resoln;
      int np;
 {
   int j, z, y, x, t, i, offset;
-  float sum;
-  float **grad_W, *k_tilda;
-  float fexp2();
+  double sum;
+  double **grad_W, *k_tilda;
+  double fexp2();
 
-  if(!(grad_W = (float **) malloc( (max_resoln+1) * sizeof(float *) )))
+  if(!(grad_W = (double **) malloc( (max_resoln+1) * sizeof(double *) )))
     error("Memory allocation failed for grad_pis in K_compute.c \n");
-  if(!(k_tilda = (float *) malloc( np * sizeof(float) )))
+  if(!(k_tilda = (double *) malloc( np * sizeof(double) )))
     error("Memory allocation failed for k_tilda in K_compute.c \n");
   
   for(i = 1; i <= max_resoln; i++)
-    if(!(grad_W[i] = (float *)malloc(np * sizeof(float))))
+    if(!(grad_W[i] = (double *)malloc(np * sizeof(double))))
       error("Memory allocation failed for grad_W[] in K_compute.c \n");
 
 
@@ -117,10 +119,10 @@ void signal_K_compute(K,W,max_resoln,np )
   /* k_tilda is one dimensional ...                             */
   /**************************************************************/
 
-  if(!((*K)=(float **) malloc( (np+1) * sizeof(float *))))
+  if(!((*K)=(double **) malloc( (np+1) * sizeof(double *))))
     error("Memory allocation failed for *k in K_compute.c \n");
   for ( t = 0; t <= np; t++ )
-    if(!((*K)[t] = (float *) malloc( (np+1) * sizeof(float) )))
+    if(!((*K)[t] = (double *) malloc( (np+1) * sizeof(double) )))
       error("Memory allocation failed for (*k)[] in K_compute.c \n");
   
   for ( t = 0; t < np; t++ )    {
@@ -153,15 +155,15 @@ void signal_K_compute(K,W,max_resoln,np )
 
 
 void signal_tilda_adjust(tilda,ksize,fname,fsize)
-     float **tilda;
+     double **tilda;
      char *fname;
      int fsize, ksize;
 {
-  float *tmp;
+  double *tmp;
   int i, j, k, l, m, n;
   int rsize, middle, rest;
   
-  if(!(*tilda = (float *)malloc(sizeof(float) * ksize)))
+  if(!(*tilda = (double *)malloc(sizeof(double) * ksize)))
     error("Memory allocation failed for *tilda in K_op.c \n");
   signal_zero(*tilda, ksize);
 

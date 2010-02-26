@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 /* #include "wavelet.h" */
 #include "dau_wave.h"
 
@@ -189,17 +191,17 @@ int max_resoln;
 /****************************************************************************/
 
 void init_phi_array( phi_array, max_resoln )
-float **phi_array;
+double **phi_array;
 int max_resoln;
 {
-  float inc = 1.0 / pow( 2.0, (float) max_resoln );
+  double inc = 1.0 / pow( 2.0, (double) max_resoln );
   int array_size = (2*NW-1) * twoto[max_resoln] +1;
-  float arg;
+  double arg;
   int i;
 
-  *phi_array = (float *) malloc( array_size * sizeof(float) );  
+  *phi_array = (double *) malloc( array_size * sizeof(double) );  
   for ( arg = 0.0, i = 0; i < array_size; arg += inc, i++ )
-    (*phi_array)[i] = (float) phi( arg );
+    (*phi_array)[i] = (double) phi( arg );
 }
 
 /****************************************************************************/
@@ -207,16 +209,16 @@ int max_resoln;
 /****************************************************************************/
 
 void init_psi_array( psi_array, max_resoln )
-float **psi_array;
+double **psi_array;
 int max_resoln;
 {
-  float inc = 1.0 / pow( 2.0, (float) max_resoln );
+  double inc = 1.0 / pow( 2.0, (double) max_resoln );
   int array_size = (2*NW -1) * twoto[max_resoln] +1;
-  float arg;
+  double arg;
   int i;
 
-  *psi_array = (float *) malloc( array_size * sizeof(float) );  
+  *psi_array = (double *) malloc( array_size * sizeof(double) );  
   for ( arg = 0.0, i = 0; i < array_size; arg += inc, i++ )
-    (*psi_array)[i] = (float) Psi( arg - NW );
+    (*psi_array)[i] = (double) Psi( arg - NW );
 }
 

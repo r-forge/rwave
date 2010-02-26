@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 
 /* NUMERICAL RECIPE */
 
@@ -145,11 +147,11 @@ void svdcmp(double **a, int m, int n, double *w, double **v)
       flag = 1;
       for(l=k; l >= 1; l--) {
 	nm = l-1;
-	if((float)(fabs(rv1[l]) + anorm) == (float)anorm) {
+	if((double)(fabs(rv1[l]) + anorm) == (double)anorm) {
 	  flag = 0;
 	  break;
 	}
-	if((float)(fabs(w[nm]) + anorm) == (float)anorm) break; 
+	if((double)(fabs(w[nm]) + anorm) == (double)anorm) break; 
       }
       if(flag) {
 	c = 0.0;
@@ -157,7 +159,7 @@ void svdcmp(double **a, int m, int n, double *w, double **v)
 	for(i = l; i <= k; i++) {
 	  f = s * rv1[i];
 	  rv1[i] = c * rv1[i];
-	  if ((float)(fabs(f) + anorm) == (float)anorm) break;
+	  if ((double)(fabs(f) + anorm) == (double)anorm) break;
 	  g = w[i];
 	  h = pythag(f,g);
 	  w[i] = h;
@@ -270,19 +272,19 @@ void svbksb(double **U, double *W, double **V, int m, int n,
   
 /* solve linear Ax = B by single value decomposition */
 	   
-void svdecomp_solve(float **a, float *b, float *x, int m,
-  int n, float **w, float ***v)
+void svdecomp_solve(double **a, double *b, double *x, int m,
+  int n, double **w, double ***v)
 {
   int i, j;
   double **A, *W, **V, *B, *X;
   void double_residue();
 
-  if(!((*w) = (float *)malloc(sizeof(float) * n)))
+  if(!((*w) = (double *)malloc(sizeof(double) * n)))
     error("Memory allocation failed for (*w) in svd.c \n");
-  if(!((*v) = (float **)malloc(sizeof(float *) * n)))
+  if(!((*v) = (double **)malloc(sizeof(double *) * n)))
     error("Memory allocation failed for (*v) in svd.c \n");
   for(i = 0; i < n; i++) 
-    if(!((*v)[i] = (float *)malloc(sizeof(float) * n)))
+    if(!((*v)[i] = (double *)malloc(sizeof(double) * n)))
       error("Memory allocation failed for (*v)[] in svd.c \n");
   
   if(!(W = (double *)malloc(sizeof(double) * (n+1))))
@@ -314,15 +316,15 @@ void svdecomp_solve(float **a, float *b, float *x, int m,
 
   for( i = 0; i < m; i++) 
     for(j = 0; j < n; j++) 
-      a[i][j] = (float)(A[i+1][j+1]);
+      a[i][j] = (double)(A[i+1][j+1]);
   
   for( i = 0; i < n; i++)
     for(j = 0; j < n; j++) 
-      (*v)[i][j] = (float)(V[i+1][j+1]);
+      (*v)[i][j] = (double)(V[i+1][j+1]);
   
   for(i = 0; i < n; i++) {
-    (*w)[i] = (float)(W[i + 1]);
-    x[i] = (float)(X[i+1]);
+    (*w)[i] = (double)(W[i + 1]);
+    x[i] = (double)(X[i+1]);
   }
   
 /*  residue(a,*w,*v,m,n,b,x);  */
@@ -347,19 +349,19 @@ void svdecomp_solve(float **a, float *b, float *x, int m,
     
 /* compute the L2 Norm */
 
-void residue(float **a, float *w, float **v, int m, int n,
-  float *b, float *x)
+void residue(double **a, double *w, double **v, int m, int n,
+  double *b, double *x)
 {
-  float **tmp, *tmp1;
-  float sum;
+  double **tmp, *tmp1;
+  double sum;
   int i, j, k;
 
-  if(!(tmp = (float **)malloc(sizeof(float *) * m)))
+  if(!(tmp = (double **)malloc(sizeof(double *) * m)))
     error("Memory allocation failed for tmp in svd.c \n");
-  if(!(tmp1 = (float *)malloc(sizeof(float) * m)))
+  if(!(tmp1 = (double *)malloc(sizeof(double) * m)))
     error("Memory allocation failed for tmp1 in svd.c \n");
   for(i = 0 ; i < m; i++)
-    if(!(tmp[i] = (float *)malloc(sizeof(float) * n)))
+    if(!(tmp[i] = (double *)malloc(sizeof(double) * n)))
       error("Memory allocation failed for tmp[] in svd.c \n");
   
   for(i = 0; i < m; i++)
@@ -434,17 +436,17 @@ void double_residue(double **a, double *w, double **v, int m,
     
 /* compute the L2 Norm */
 /*
-void Sresidue(float *a, float *w, float *v, int m, int n,
-  float *b, float *x)
+void Sresidue(double *a, double *w, double *v, int m, int n,
+  double *b, double *x)
 {
-  float *tmp, *tmp1;
-  float sum;
+  double *tmp, *tmp1;
+  double sum;
   int i, j, k;
   int t;
 
-  if(!(tmp = (float *)malloc(sizeof(float) * m * n)))
+  if(!(tmp = (double *)malloc(sizeof(double) * m * n)))
     error("Memory allocation failed for tmp in svd.c \n");
-  if(!(tmp1 = (float *)malloc(sizeof(float) * m)))
+  if(!(tmp1 = (double *)malloc(sizeof(double) * m)))
     error("Memory allocation failed for tmp1 in svd.c \n");
   
   for(i = 0; i < m; i++)

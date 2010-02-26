@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 
 /***************************************************************
 *              (c) Copyright  1997                             *
@@ -25,7 +27,7 @@
 *   M: number of vanishing moments
 ***************************************************************/
 
-void DOG_frequency(int M,float scale,double *w,int isize)
+void DOG_frequency(int M,double scale,double *w,int isize)
 {
   double tmp, cst;
   int i;
@@ -55,11 +57,11 @@ void DOG_frequency(int M,float scale,double *w,int isize)
 *   pcenterfrequency: centralfrequency of Morlet wavelet
 ******************************************************************/
 
-void Scwt_DOG_r(float *input, double *Oreal, double *Oimage,
+void Scwt_DOG_r(double *input, double *Oreal, double *Oimage,
    int *pnboctave, int *pnbvoice, int *pinputsize, int *pM)
 {	
   int nboctave, nbvoice, i, j, inputsize, M;
-  float a;
+  double a;
   double *Ri2, *Ri1, *Ii1, *Ii, *Ri;
 
 
@@ -87,7 +89,7 @@ void Scwt_DOG_r(float *input, double *Oreal, double *Oimage,
   
   for(i = 1; i <= nboctave; i++) {
     for(j=0; j < nbvoice; j++) {
-      a = (float)(pow((double)2,(double)(i+j/((double)nbvoice))));
+      a = (double)(pow((double)2,(double)(i+j/((double)nbvoice))));
       DOG_frequency(M,a,Ri2,inputsize); 
       multi(Ri1,Ii1,Ri2,Oreal,Oimage,inputsize);
       double_fft(Oreal,Oimage,Oreal,Oimage,inputsize,1); 
@@ -122,12 +124,12 @@ void Scwt_DOG_r(float *input, double *Oreal, double *Oimage,
 *   pM: number of vanishing moments
 ******************************************************************/
 
-void Scwt_DOG(float *Rinput,float *Iinput,double *Oreal,
+void Scwt_DOG(double *Rinput,double *Iinput,double *Oreal,
    double *Oimage,int *pnboctave,int *pnbvoice,
    int *pinputsize,int *pM)
 {	
   int nboctave, nbvoice, i, j, inputsize, M;
-  float a;
+  double a;
   double *Ri2, *Ri1, *Ii1, *Ii, *Ri;
 
 
@@ -155,7 +157,7 @@ void Scwt_DOG(float *Rinput,float *Iinput,double *Oreal,
   
   for(i = 1; i <= nboctave; i++) {
     for(j=0; j < nbvoice; j++) {
-      a = (float)(pow((double)2,(double)(i+j/((double)nbvoice))));
+      a = (double)(pow((double)2,(double)(i+j/((double)nbvoice))));
       DOG_frequency(M,a,Ri2,inputsize); 
       multi(Ri1,Ii1,Ri2,Oreal,Oimage,inputsize);
       double_fft(Oreal,Oimage,Oreal,Oimage,inputsize,1); 
@@ -183,12 +185,12 @@ void Scwt_DOG(float *Rinput,float *Iinput,double *Oreal,
 *     Oreal, Oimage: real and imaginary parts of the cwt.
 ***************************************************************/
 
-void Svwt_DOG(float *Rinput,float *Iinput,double *Oreal,
-   double *Oimage,float *pa,int *pinputsize,
+void Svwt_DOG(double *Rinput,double *Iinput,double *Oreal,
+   double *Oimage,double *pa,int *pinputsize,
    int *pM)
 {	
   int i, inputsize, M;
-  float a;
+  double a;
   double *Ri2, *Ri1, *Ii1, *Ii, *Ri;
 
 

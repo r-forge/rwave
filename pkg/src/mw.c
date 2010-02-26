@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 
 /*******************************************************************
 *              (c) Copyright  1997                                 *
@@ -29,14 +31,14 @@
 *
 ****************************************************************/
 
-void Sf_compute(float *Sf, float *f, int *max_resoln_ptr,
+void Sf_compute(double *Sf, double *f, int *max_resoln_ptr,
   int *np_ptr, char **pfiltername)
 {
   int max_resoln = *max_resoln_ptr;
   int np = *np_ptr;
   int j, n, k, offset;
   bound *H_bound, *G_bound;
-  float **H, sum;
+  double **H, sum;
   char *filtername;
 
 
@@ -82,7 +84,7 @@ void Sf_compute(float *Sf, float *f, int *max_resoln_ptr,
 *
 ****************************************************************/
 
-void Wf_compute(float *Wf, float *Sf, int *max_resoln_ptr,
+void Wf_compute(double *Wf, double *Sf, int *max_resoln_ptr,
   int *np_ptr, char **pfiltername)
 {
   int max_resoln = *max_resoln_ptr;
@@ -90,7 +92,7 @@ void Wf_compute(float *Wf, float *Sf, int *max_resoln_ptr,
   int j, n, k, offset;
   char *filtername;
   bound *G_bound, *H_bound;
-  float **G, sum;
+  double **G, sum;
 
   filtername = *pfiltername;
   HGfilter_bound(filtername,&H_bound, &G_bound, max_resoln );

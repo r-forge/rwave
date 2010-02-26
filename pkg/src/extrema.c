@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 
 /******************************************************************
 *              (c) Copyright  1997                                *
@@ -24,7 +26,7 @@
 ****************************************************************/
 
 
-void modulus_maxima(float *extrema, float *wt, int *resoln_ptr,
+void modulus_maxima(double *extrema, double *wt, int *resoln_ptr,
   int *np_ptr )
 {
   int resoln = *resoln_ptr;
@@ -35,7 +37,7 @@ void modulus_maxima(float *extrema, float *wt, int *resoln_ptr,
   int offset;
 
 
-  if(!(abs  = (double *) malloc( np * sizeof(double) )))
+  if(!(abs  = (double *) R_alloc( np , sizeof(double) )))
     error("Memory allocation failed for abs in extrema.c");
 
   for (j = 0; j < resoln; j++)  {
@@ -54,7 +56,7 @@ void modulus_maxima(float *extrema, float *wt, int *resoln_ptr,
 	extrema[offset+x] = 0.0;
     }
   }
-  free( abs );
+  //free( abs );
 }
 
 /****************************************************************
@@ -70,7 +72,7 @@ void modulus_maxima(float *extrema, float *wt, int *resoln_ptr,
 *
 ****************************************************************/
 
-void extrema_input(float *extrema, int max_resoln, int np,
+void extrema_input(double *extrema, int max_resoln, int np,
   image_ext **ext, int *num_of_extrema)
 {
   int j, k, t, length, offset;

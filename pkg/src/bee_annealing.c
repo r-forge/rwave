@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 
 /***************************************************************
 *    $Log: bee_annealing.c,v $                                 *
@@ -40,7 +42,7 @@
 
 
 void Sbee_annealing(double *smodulus, double *beemap,
-	       float *pc,
+	       double *pc,
 	       int *psigsize, int *pnscale, int *piteration,
                int *pseed, int *pbstep, int *pnbbee,
                int *pintegral, int *pchain, int *flag)
@@ -50,7 +52,7 @@ void Sbee_annealing(double *smodulus, double *beemap,
   int *a, *b, integral, chain, s, count;
   int seed, nscale, iteration, sigsize, nbbee, tstep;
   long idum;
-  float c;
+  double c;
   double ran1();
 
   chain = *pchain;
