@@ -7,8 +7,8 @@
 }
 \usage{
 gcrcrec(siginput, inputgt, beemap, nvoice, freqstep, scale, compr,
-bstep=5, ptile=0.01, epsilon=0, fast=TRUE, para=5, minnbnodes=3,
-hflag=FALSE, real=FALSE, plot=2)
+        bstep=5, ptile=0.01, epsilon=0, fast=TRUE, para=5, minnbnodes=3,
+        hflag=FALSE, real=FALSE, plot=2)
 }
 \arguments{
   \item{siginput}{original signal.}
@@ -33,7 +33,7 @@ hflag=FALSE, real=FALSE, plot=2)
         another.}
       \item{2}{displays signal, components and reconstruction.}
     }
-  } 
+  }
 }
 \details{
   When \code{ptile} is high, boundary effects may appear.  \code{para} 
@@ -46,10 +46,10 @@ hflag=FALSE, real=FALSE, plot=2)
   \item{comp}{2D array containing the signals reconstructed from ridges.}
 }
 \references{
-See discussions in the text of \dQuote{Practical Time-Frequency Analysis}.
+  See discussions in the text of \dQuote{Practical Time-Frequency Analysis}.
 }
 \seealso{
-\code{\link{crc}}, \code{\link{cfamily}}, \code{\link{crcrec}},
-\code{\link{scrcrec}}.
+  \code{\link{crc}}, \code{\link{cfamily}}, \code{\link{crcrec}},
+  \code{\link{scrcrec}}.
 }
 \keyword{ts}
