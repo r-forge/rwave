@@ -10,6 +10,7 @@
 ***************************************************************/
 
 #include "Swave.h"
+#include "denoise.h"
 
 
 
@@ -33,7 +34,7 @@ void thierry_frequency(int M,double scale,double *w,int isize)
 
   for(i = 0; i < isize; i++) {
     tmp = (double)(scale * (double)i * (double)M/(double)isize);
-    *w = exp(-tmp)*pow(tmp,(double)M);
+    *w = exp(-tmp) * pow(tmp,(double)M);
     w++;
   }
   return;
@@ -67,15 +68,15 @@ void Scwt_thierry_r(double *input, double *Oreal, double *Oimage,
   nboctave = *pnboctave;
   nbvoice = *pnbvoice;
   inputsize = *pinputsize;
-  if(!(Ri2 = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ri2 = (double *) R_alloc(inputsize, sizeof(double))))
     error("Memory allocation failed for Ri2 in cwt_morlet.c \n");
-  if(!(Ri1 = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ri1 = (double *) R_alloc(inputsize, sizeof(double) )))
     error("Memory allocation failed for Ri1 in cwt_morlet.c \n");
-  if(!(Ii1 = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ii1 = (double *) R_alloc(inputsize, sizeof(double) )))
     error("Memory allocation failed for Ii1 in cwt_morlet.c \n");
-  if(!(Ri = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ri = (double *) R_alloc(inputsize, sizeof(double) )))
     error("Memory allocation failed for Ri in cwt_morlet.c \n");
-  if(!(Ii = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ii = (double *) R_alloc(inputsize, sizeof(double) )))
     error("Memory allocation failed for Ii in cwt_morlet.c \n");
 
   for(i = 0; i < inputsize; i++) {
@@ -95,13 +96,6 @@ void Scwt_thierry_r(double *input, double *Oreal, double *Oimage,
       Oimage = Oimage + inputsize;  
     }
   }
-
-  free((char *)Ri2);
-  free((char *)Ri1);
-  free((char *)Ii1);
-  free((char *)Ri);
-  free((char *)Ii);
-  return;
 }
 
 
@@ -139,15 +133,15 @@ void Scwt_thierry(double *Rinput,double *Iinput,double *Oreal,
   /********* edit by xian,  Mon 14 Dec 2009 09:19:33 PM MST ****** 
   Changing from malloc(sizeof(double) * inputsize) to R_alloc()
   ******************** edit by xian *****/
-  if(!(Ri2 = (double *) R_alloc(inputsize, sizeof(double)) ))
+  if(!(Ri2 = (double *) R_alloc((size_t) inputsize, sizeof(double)) ))
     error("Memory allocation failed for Ri2 in cwt_thierry.c \n");
-  if(!(Ri1 = (double *) R_alloc(inputsize, sizeof(double)) ))
+  if(!(Ri1 = (double *) R_alloc((size_t) inputsize, sizeof(double)) ))
     error("Memory allocation failed for Ri1 in cwt_thierry.c \n");
-  if(!(Ii1 = (double *) R_alloc(inputsize, sizeof(double)) ))
+  if(!(Ii1 = (double *) R_alloc((size_t) inputsize, sizeof(double)) ))
     error("Memory allocation failed for Ii1 in cwt_thierry.c \n");
-  if(!(Ri = (double *) R_alloc(inputsize, sizeof(double)) ))
+  if(!(Ri = (double *) R_alloc((size_t) inputsize, sizeof(double)) ))
     error("Memory allocation failed for Ri in cwt_thierry.c \n");
-  if(!(Ii = (double *) R_alloc(inputsize, sizeof(double)) ))
+  if(!(Ii = (double *) R_alloc((size_t) inputsize, sizeof(double)) ))
     error("Memory allocation failed for Ii in cwt_thierry.c \n");
 
   for(i = 0; i < inputsize; i++) {
@@ -167,14 +161,6 @@ void Scwt_thierry(double *Rinput,double *Iinput,double *Oreal,
       Oimage = Oimage + inputsize;  
     }
   }
-
-  /********* edit by xian,  Mon 14 Dec 2009 09:19:33 PM MST ****** 
-  free((char *)Ri2);
-  free((char *)Ri1);
-  free((char *)Ii1);
-  free((char *)Ri);
-  free((char *)Ii);
-  ******************** edit by xian *****/
 }
 
 
@@ -201,15 +187,15 @@ void Svwt_thierry(double *Rinput,double *Iinput,double *Oreal,
   M = *pM;
   a = *pa;
   inputsize = *pinputsize;
-  if(!(Ri2 = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ri2 = (double *) R_alloc((size_t) inputsize, sizeof(double) )))
     error("Memory allocation failed for Ri2 in cwt_morlet.c \n");
-  if(!(Ri1 = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ri1 = (double *) R_alloc((size_t) inputsize, sizeof(double) )))
     error("Memory allocation failed for Ri1 in cwt_morlet.c \n");
-  if(!(Ii1 = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ii1 = (double *) R_alloc((size_t) inputsize, sizeof(double) )))
     error("Memory allocation failed for Ii1 in cwt_morlet.c \n");
-  if(!(Ri = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ri = (double *) R_alloc((size_t) inputsize, sizeof(double) )))
     error("Memory allocation failed for Ri in cwt_morlet.c \n");
-  if(!(Ii = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ii = (double *) R_alloc((size_t) inputsize, sizeof(double) )))
     error("Memory allocation failed for Ii in cwt_morlet.c \n");
 
   for(i = 0; i < inputsize; i++) {
@@ -223,11 +209,6 @@ void Svwt_thierry(double *Rinput,double *Iinput,double *Oreal,
   multi(Ri1,Ii1,Ri2,Oreal,Oimage,inputsize);
   double_fft(Oreal,Oimage,Oreal,Oimage,inputsize,2); 
   
-  free((char *)Ri2);
-  free((char *)Ri1);
-  free((char *)Ii1);
-  free((char *)Ri);
-  free((char *)Ii);
 }
 
 

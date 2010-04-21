@@ -29,7 +29,7 @@ void double_fft(double *Or,double *Oi,double *Ir,double *Ii,
   nt = find2power(isize);
   newsize = 1 << nt;
 
-  if(!(tmp = (double *)malloc((sizeof(double) * 2 * newsize))))
+  if(!(tmp = (double *)R_alloc(newsize * 2, sizeof(double))))
      error("Memory allocation failed for tmp in cwt_morlet.c \n");
 
   for(i = 0; i < isize; i++) {
@@ -49,5 +49,4 @@ void double_fft(double *Or,double *Oi,double *Ir,double *Ii,
       Oi[i] = tmp[2 * i + 1];
     }
   }
-  free((char *)tmp);
 }

@@ -21,7 +21,7 @@
 ****************************************************************/
 
 /* 2^j  (j > 0) */
-iexp2(j)
+int iexp2(j)
   int j;
 {
   if(j == 0) return(1);
@@ -49,11 +49,11 @@ void Hfilter_compute(filtername,H,H_bound,max_resoln )
 {
   int j, i;
 
-  if(!(*H = (double **) malloc( (max_resoln+1) * sizeof(double *))))
+  if(!(*H = (double **) R_alloc( (max_resoln+1) , sizeof(double *))))
     error("Memory allocation failed for *H in filter.c \n");
 
   for ( j = 0; j <= max_resoln; j++ )  {
-    if(!((*H)[j] = (double *) malloc( H_bound[j].size * sizeof(double))))
+    if(!((*H)[j] = (double *) R_alloc( H_bound[j].size , sizeof(double))))
       error("Memory allocation failed for H[] in filter.c \n");
     signal_zero((*H)[j],H_bound[j].size);
 
@@ -93,12 +93,12 @@ void Gfilter_compute(filtername,G,G_bound,max_resoln)
 {
   int j, i;
 
-  if(!(*G = (double **) malloc( (max_resoln+1) * sizeof(double *))))
+  if(!(*G = (double **) R_alloc( (max_resoln+1) , sizeof(double *))))
     error("Memory allocation failed for G in filter.c \n");    
 
   for ( j = 0; j <= max_resoln; j++ )  {
 
-    if(!((*G)[j] = (double *) malloc( G_bound[j].size * sizeof(double))))
+    if(!((*G)[j] = (double *) R_alloc( G_bound[j].size , sizeof(double))))
       error("Memory allocation failed for G[] in filter.c \n");    
     signal_zero((*G)[j],G_bound[j].size);
 
@@ -141,9 +141,9 @@ void HGfilter_bound(filtername,H_bound,G_bound,max_resoln )
   int j;
   int iexp2();
 
-  if(!(*H_bound = (bound *) malloc( (max_resoln+1) * sizeof(bound) )))
+  if(!(*H_bound = (bound *) R_alloc( (max_resoln+1) , sizeof(bound) )))
     error("Memory allocation failed for *H_bound in filter.c \n");    
-  if(!(*G_bound = (bound *) malloc( (max_resoln+1) * sizeof(bound) )))
+  if(!(*G_bound = (bound *) R_alloc( (max_resoln+1) , sizeof(bound) )))
     error("Memory allocation failed for *G_bound in filter.c \n");    
 
 
@@ -229,15 +229,15 @@ void HG_hat_compute(filtername,H_hat,G_hat,max_resoln,np)
   }
 
 /*  printf("computing H_hat & G_hat with Gaussian1 filter\n");  */
-  if(!(*H_hat = (double **) malloc( (max_resoln+1) * sizeof(double) )))
+  if(!(*H_hat = (double **) R_alloc( (max_resoln+1) , sizeof(double) )))
     error("Memory allocation failed for *H_hat in filter.c \n");
-  if(!(*G_hat = (double **) malloc( (max_resoln+1) * sizeof(double) )))
+  if(!(*G_hat = (double **) R_alloc( (max_resoln+1) , sizeof(double) )))
     error("Memory allocation failed for *G_hat in filter.c \n");
   
   for ( j = 0; j <= max_resoln; j++ )  {
-    if(!((*H_hat)[j] = (double *) malloc( 2*(np+1) * sizeof(double) )))
+    if(!((*H_hat)[j] = (double *) R_alloc( 2*(np+1) , sizeof(double) )))
       error("Memory allocation failed for *H_hat[] in filter.c \n");
-    if(!((*G_hat)[j] = (double *) malloc( 2*(np+1) * sizeof(double) )))
+    if(!((*G_hat)[j] = (double *) R_alloc( 2*(np+1) , sizeof(double) )))
       error("Memory allocation failed for *G_hat[] in filter.c \n");
     
     if ( j == 0 )    {
@@ -291,11 +291,11 @@ void Sfilter_compute(filtername,S,S_bound,max_resoln)
 {
   int j, i;
 
-  if(!(*S = (double **) malloc( (max_resoln+1) * sizeof(double *))))
+  if(!(*S = (double **) R_alloc( (max_resoln+1) , sizeof(double *))))
     error("Memory allocation failed for *S in filter.c \n");
 
   for ( j = 0; j <= max_resoln; j++ )  {
-    if(!((*S)[j] = (double *) malloc( S_bound[j].size * sizeof(double))))
+    if(!((*S)[j] = (double *) R_alloc( S_bound[j].size , sizeof(double))))
       error("Memory allocation failed for S[] in filter.c \n");
     signal_zero((*S)[j], S_bound[j].size);
 
@@ -354,12 +354,12 @@ void Kfilter_compute(filtername,K,K_bound,max_resoln)
 {
   int j, i;
 
-  if(!(*K = (double **) malloc( (max_resoln+1) * sizeof(double *))))
+  if(!(*K = (double **) R_alloc( (max_resoln+1) , sizeof(double *))))
     error("Memory allocation failed for K in filter.c \n");    
 
   for ( j = 0; j <= max_resoln; j++ )  {
 
-    if(!((*K)[j] = (double *) malloc( K_bound[j].size * sizeof(double))))
+    if(!((*K)[j] = (double *) R_alloc( K_bound[j].size , sizeof(double))))
       error("Memory allocation failed for K[] in filter.c \n");    
     signal_zero((*K)[j], K_bound[j].size);
 
@@ -419,11 +419,11 @@ void Lfilter_compute(filtername,L,L_bound,max_resoln)
 {
   int j, i;
 
-  if(!(*L = (double **) malloc( (max_resoln+1) * sizeof(double *))))
+  if(!(*L = (double **) R_alloc( (max_resoln+1) , sizeof(double *))))
     error("Memory allocation failed for L in filter.c \n");    
 
   for ( j = 0; j <= max_resoln; j++ )  {
-    if(!((*L)[j] = (double *) malloc( L_bound[j].size * sizeof(double))))
+    if(!((*L)[j] = (double *) R_alloc( L_bound[j].size , sizeof(double))))
       error("Memory allocation failed for L[] in filter.c \n");    
     signal_zero((*L)[j], L_bound[j].size);
 
@@ -486,9 +486,9 @@ void KSfilter_bound(filtername,K_bound,S_bound,max_resoln)
   int j;
   int iexp2();
 
-  if(!(*K_bound = (bound *) malloc( (max_resoln+1) * sizeof(bound) )))
+  if(!(*K_bound = (bound *) R_alloc( (max_resoln+1) , sizeof(bound) )))
     error("Memory allocation failed for *K_bound in signal_back.c \n");
-  if(!(*S_bound = (bound *) malloc( (max_resoln+1) * sizeof(bound) )))
+  if(!(*S_bound = (bound *) R_alloc( (max_resoln+1) , sizeof(bound) )))
     error("Memory allocation failed for *S_bound in filter.c \n");
   
   for ( j = 0; j <= max_resoln; j++ )    {
@@ -568,7 +568,7 @@ void Lfilter_bound(filtername,L_bound,max_resoln)
   int j;
   int iexp2();
 
-  if(!(*L_bound = (bound *) malloc( (max_resoln+1) * sizeof(bound) )))
+  if(!(*L_bound = (bound *) R_alloc( (max_resoln+1) , sizeof(bound) )))
     error("Memory allocation failed for *L_bound in filter.c \n");
   
   for ( j = 0; j <= max_resoln; j++ )    {
@@ -629,10 +629,10 @@ void PsiPhifilter_bound(psi,phi,H_bound,G_bound,max_resoln)
 {
   int j;
 
-  if(!(*psi = (bound *) malloc( (max_resoln+1) * sizeof(bound) )))
+  if(!(*psi = (bound *) R_alloc( (max_resoln+1) , sizeof(bound) )))
     error("Memory allocation failed for *psi in K_compute.c \n");
 
-  if(!(*phi = (bound *) malloc( (max_resoln+1) * sizeof(bound) )))
+  if(!(*phi = (bound *) R_alloc( (max_resoln+1) , sizeof(bound) )))
     error("Memory allocation failed for *phi in K_compute.c \n");
   
   (*phi)[0].lb = (*phi)[0].ub = 0;
@@ -692,34 +692,34 @@ void signal_W_S(W,S,max_resoln,np)
      int max_resoln, np;
 {
   int j, m, n, t;
-  char filename1[STRING_SIZE],filename2[STRING_SIZE],filtername[STRING_SIZE];
+  char filename1[STRING_SIZE],filename2[STRING_SIZE], *filtername = "Gaussian1";
   bound *H_bound,*G_bound;
   double **H_filter,**G_filter;
   double **H;
   double **G;
   double *prev,*curr,*temp,*normalize_factor;
   
-  if(!(H = (double **) malloc( max_resoln * sizeof(double *) )))
+  if(!(H = (double **) R_alloc( max_resoln , sizeof(double *) )))
     error("Memory allocation failed for H in oneD_filter.c \n");
-  if(!(G = (double **) malloc( max_resoln * sizeof(double *) )))
+  if(!(G = (double **) R_alloc( max_resoln , sizeof(double *) )))
     error("Memory allocation failed for G in oneD_filter.c \n");
-  if(!(prev = (double *) malloc( np * sizeof(double) )))
+  if(!(prev = (double *) R_alloc( np , sizeof(double) )))
     error("Memory allocation failed for prev in oneD_filter.c \n");
-  if(!(curr = (double *) malloc( np * sizeof(double) )))
+  if(!(curr = (double *) R_alloc( np , sizeof(double) )))
     error("Memory allocation failed for curr in oneD_filter.c \n");
-  if(!(temp = (double *) malloc( np * sizeof(double) )))
+  if(!(temp = (double *) R_alloc( np , sizeof(double) )))
     error("Memory allocation failed for temp in oneD_filter.c \n");
 
-  filename_given(filtername,"Gaussian1");
+  //filename_given(filtername,"Gaussian1");
   HGfilter_bound(filtername,&H_bound,&G_bound,max_resoln );  
   Hfilter_compute(filtername,&H_filter, H_bound, max_resoln );
   Gfilter_compute(filtername,&G_filter, G_bound, max_resoln);
 /*  printf("Using Gaussian1 filter \n"); */
 
   for ( j = 0; j < max_resoln; j++ )   {
-    if(!(H[j] = (double *) malloc( np * sizeof(double) )))
+    if(!(H[j] = (double *) R_alloc( np , sizeof(double) )))
       error("Memory allocation failed for H[] in oneD_filter.c \n");
-    if(!(G[j] = (double *) malloc( np * sizeof(double) )))
+    if(!(G[j] = (double *) R_alloc( np , sizeof(double) )))
       error("Memory allocation failed for G[] in oneD_filter.c \n");
     
     for ( m = 0; m < np; m++ ) 
@@ -741,15 +741,15 @@ void signal_W_S(W,S,max_resoln,np)
   }
 
 
-  if(!(*W = (double **) malloc( (max_resoln+1) * sizeof(double *))))
+  if(!(*W = (double **) R_alloc( (max_resoln+1) , sizeof(double *))))
     error("Memory allocation failed for *W in oneD_filter.c \n");
-  if(!(*S = (double **) malloc( (max_resoln+1) * sizeof(double *) )))
+  if(!(*S = (double **) R_alloc( (max_resoln+1) , sizeof(double *) )))
     error("Memory allocation failed for *S in oneD_filter.c \n");
 
   for ( j = 1; j <= max_resoln; j++ )  {
-    if(!((*W)[j] = (double *) malloc( np * sizeof(double))))
+    if(!((*W)[j] = (double *) R_alloc( np , sizeof(double))))
       error("Memory allocation failed for (*W)[] in oneD_filter.c \n");
-    if(!((*S)[j] = (double *) malloc( np * sizeof(double) )))
+    if(!((*S)[j] = (double *) R_alloc( np , sizeof(double) )))
       error("Memory allocation failed for (*S)[] in oneD_filter.c \n");
 
     if ( j == 1 )    {
@@ -784,24 +784,6 @@ void signal_W_S(W,S,max_resoln,np)
     output_signal((*S)[j],np,filename2);
 */
   }
-
-
-  free( H_bound );
-  free( G_bound );
-  free( prev );
-  free( curr );
-  for ( j = 0; j < max_resoln; j++ )
-  {
-    free( H_filter[j] );
-    free( G_filter[j] );
-    free( H[j] );
-    free( G[j] );
-  }
-  free( H_filter );
-  free( G_filter );
-  free( H );
-  free( G );
-
 }
 
 /****************************************************************
@@ -832,27 +814,27 @@ void signal_W_hat_S_hat(W_hat,S_hat,max_resoln,np)
      int max_resoln; 
      int np;
 {
-  char filename1[STRING_SIZE],filename2[STRING_SIZE],filtername[STRING_SIZE];
+  char filename1[STRING_SIZE],filename2[STRING_SIZE], *filtername = "Gaussian1";
   int two_np;
   double *prev, *curr, **H_hat, **G_hat;
   int j, m;
 
   two_np = 2 * np;   /* real and imaginary */
-  if(!(prev = (double *) malloc( two_np * sizeof(double))))
+  if(!(prev = (double *) R_alloc( two_np , sizeof(double))))
      error("Memory allocation failed for prev in oneD_filter.c \n");
-  if(!(curr = (double *) malloc( two_np * sizeof(double) )))
+  if(!(curr = (double *) R_alloc( two_np , sizeof(double) )))
      error("Memory allocation failed for curr in oneD_filter.c \n");
 
-  filename_given(filtername,"Gaussian1");
+  //filename_given(filtername,"Gaussian1");
   HG_hat_compute(filtername,&H_hat,&G_hat,max_resoln,np);
 /*  printf("computing W_hat & S_hat with Gaussian1 filter\n");  */
 
-  if(!(*W_hat = (double **) malloc( (max_resoln+1) * sizeof(double) )))
+  if(!(*W_hat = (double **) R_alloc( (max_resoln+1) , sizeof(double) )))
      error("Memory allocation failed for *W_hat in oneD_filter.c \n");
-  if(!(*S_hat = (double **) malloc( (max_resoln+1) * sizeof(double) )))
+  if(!(*S_hat = (double **) R_alloc( (max_resoln+1) , sizeof(double) )))
     error("Memory allocation failed for *S_hat in oneD_filter.c \n");
 
-  if(!((*S_hat)[0] = (double *) malloc( two_np * sizeof(double) )))
+  if(!((*S_hat)[0] = (double *) R_alloc( two_np , sizeof(double) )))
      error("Memory allocation failed for *S_hat in oneD_filter.c \n");
 
   for ( m = 0; m < np; m++ )  {
@@ -860,9 +842,9 @@ void signal_W_hat_S_hat(W_hat,S_hat,max_resoln,np)
     (*S_hat)[0][2*m+1] = 0.0;
   }
   for ( j = 1; j <= max_resoln; j++ )  {
-    if(!((*W_hat)[j] = (double *) malloc( two_np * sizeof(double) )))
+    if(!((*W_hat)[j] = (double *) R_alloc( two_np , sizeof(double) )))
       error("Memory allocation failed for (*W_hat)[] in oneD_filter.c \n");
-    if(!((*S_hat)[j] = (double *) malloc( two_np * sizeof(double) )))
+    if(!((*S_hat)[j] = (double *) R_alloc( two_np , sizeof(double) )))
       error("Memory allocation failed for (*S_hat)[] in oneD_filter.c \n");
 
     if ( j == 1 ) {    /* H_hat & G_hat:  j = 0 to (max_reaoln-1) */
@@ -900,15 +882,6 @@ void signal_W_hat_S_hat(W_hat,S_hat,max_resoln,np)
     output_complex((*S_hat)[j],np,filename1,filename2);
 */
   }
-
-  free( prev );
-  free( curr );
-  for ( j = 0; j < max_resoln; j++ )  {
-    free( H_hat[j] );
-    free( G_hat[j] );
-  }
-  free( H_hat );
-  free( G_hat );
 }
 
 

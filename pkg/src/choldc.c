@@ -151,7 +151,7 @@ void choldc(double **a, int n, double p[])
 /*  if(!(A = (double **)(malloc(sizeof(double *) * (n+1)))))
     error("Memory allocation failed for A in choldc.c \n");
 */
-  if(!(P = (double *)(malloc(sizeof(double) * (n+1)))))
+  if(!(P = (double *)(R_alloc((n+1), sizeof(double) ))))
     error("Memory allocation failed for P in choldc.c \n");
 /*		  
   for(i = 0; i <= n; i++) {
@@ -175,12 +175,6 @@ void choldc(double **a, int n, double p[])
       a[i][j] = (double)(A[i+1][j+1]); */
   }
   
-/*  for(i = 0; i <= n; i++) {
-    free(A[i]);
-  }
-*/
-  free(P);
-/*  free(A); */
 }
 
 
@@ -213,11 +207,11 @@ void cholsl(double **a, int n, double p[], double b[], double x[])
 /*  if(!(A = (double **)(malloc(sizeof(double *) * (n+1)))))
     error("Memory allocation failed for A in choldc.c \n");
 */
-  if(!(P = (double *)(malloc(sizeof(double) * (n+1)))))
+  if(!(P = (double *)(R_alloc((n+1), sizeof(double) ))))
     error("Memory allocation failed for P in choldc.c \n");
-  if(!(B = (double *)(malloc(sizeof(double) * (n+1)))))
+  if(!(B = (double *)(R_alloc((n+1), sizeof(double) ))))
     error("Memory allocation failed for B in choldc.c \n");
-  if(!(X = (double *)(malloc(sizeof(double) * (n+1)))))
+  if(!(X = (double *)(R_alloc((n+1), sizeof(double) ))))
     error("Memory allocation failed for X in choldc.c \n");
 		  
 /*  for(i = 0; i <= n; i++) {
@@ -247,14 +241,6 @@ void cholsl(double **a, int n, double p[], double b[], double x[])
   }  
 
 
-/*  for(i = 0; i <= n; i++) {
-    free(A[i]);
-  }
-*/
-  free(P);
-  free(B);
-  free(X);
-/*  free(A); */
 }
 
 
@@ -274,7 +260,7 @@ double *d;
   double big,dum,sum,temp;
   double *vv;
   
-  if(!(vv=(double *) malloc( (n+1) * sizeof(double) )))
+  if(!(vv=(double *) R_alloc( (n+1) ,  sizeof(double))))
     error("Memory allocation failed for vv in choldc.c \n");
   
   *d=1.0;
@@ -318,7 +304,6 @@ double *d;
       for (i=j+1;i<=n;i++) a[i][j] *= dum;
     }
   }
-  free( vv );
 }
 #undef TINY
 #undef NRANSI

@@ -48,8 +48,8 @@ void splsnake(rate, x, y, n, yy)
   double p,qn,sig,un,*u,yp1,ypn,a,b,h;
   double *y2;
   
-  u=(double *)calloc(n,sizeof(double));
-  y2=(double *)calloc(n+1,sizeof(double));
+  u=(double *)S_alloc(n,sizeof(double));
+  y2=(double *)S_alloc(n+1,sizeof(double));
   yp1 = ypn =0;
   
   if (yp1 > 0.99e30)
@@ -98,8 +98,6 @@ void splsnake(rate, x, y, n, yy)
     b=(i-x[klo]*rate)/h;
     yy[i]=a*y[klo]+b*y[khi]+((a*a*a-a)*y2[klo]+(b*b*b-b)*y2[khi])*(h*h)/6.0;
   }
-  free((double *)u);
-  free((double *)y2);
   return;
 }
 

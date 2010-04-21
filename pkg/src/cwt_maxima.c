@@ -13,6 +13,7 @@
 
 #define MAX(x,y) ((x)>(y) ? (x) : (y))
 #include "Swave.h"
+#include "denoise.h"
 
 
 
@@ -25,7 +26,7 @@
 *  nrow,ncol: parameters of the cwt 
 *****************************************************************/
 
-Scwt_gmax(input, output, pnrow, pncol, posvector)
+void Scwt_gmax(input, output, pnrow, pncol, posvector)
      double *input, *output;
      int *pnrow, *pncol, *posvector;
 {
@@ -58,7 +59,7 @@ Scwt_gmax(input, output, pnrow, pncol, posvector)
 *  nrow,ncol: parameters of the cwt 
 *****************************************************************/
 
-Scwt_mridge(input, output, pnrow, pncol)
+void Scwt_mridge(input, output, pnrow, pncol)
      double *input, *output;
      int *pnrow, *pncol;
 {

@@ -75,10 +75,10 @@ void Sridge_annealing(double *cost, double *smodulus,
 
   recal = 1000000; /* recompute cost function every 'recal' iterations */
 
-  if(!(bcost = (double *)malloc(sizeof(double) * blocksize)))
+  if(!(bcost = (double *) R_alloc(blocksize, sizeof(double) )))
     error("Memory allocation failed for bcost at ridge_annealing.c \n");
 
-  if(!(phi2 = (double *)calloc((smodsize+1)*sub,sizeof(double))))
+  if(!(phi2 = (double *)S_alloc((smodsize+1)*sub,sizeof(double))))
     error("Memory allocation failed for phi2 at ridge_annealing.c \n");
 
 /*
@@ -246,7 +246,6 @@ void Sridge_annealing(double *cost, double *smodulus,
 	  for(i=0;i<sigsize;i++) phi[i]=phi2[i];
 	  /* splridge(1, phi, smodsize, phi2);
 	  for(i=0;i<sigsize;i++) phi[i]=phi2[i];*/
-	  free((char *)bcost);
 	  return;
 	}
       }
@@ -271,8 +270,7 @@ void Sridge_annealing(double *cost, double *smodulus,
 	for(i=0;i<sigsize;i++) phi[i]=phi2[i];
 	/* splridge(1, phi, smodsize, phi2);
 	for(i=0;i<sigsize;i++) phi[i]=phi2[i];*/
-	free((char *)bcost);
-	printf("Done !\n");
+	//printf("Done !\n");
 	return;
       }
       temperature = c/log(1. + (double)count);

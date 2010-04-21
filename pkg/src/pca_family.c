@@ -380,7 +380,7 @@ void Spca_family(double *ridgemap,int *orientmap, double *orderedmap,int *chain,
   nbchain = *pnbchain;
   maxchnlng = *pmaxchnlng;
 
-  if(!(mridge = (double *)calloc(sigsize * nscale, sizeof(double))))
+  if(!(mridge = (double *)S_alloc(sigsize * nscale, sizeof(double))))
     error("Memory allocation failed for mridge in crazy_family.c \n");
 
 
@@ -511,7 +511,6 @@ void Spca_family(double *ridgemap,int *orientmap, double *orderedmap,int *chain,
   pca_orderedmap_thresholded(orderedmap,sigsize,nscale,chain,nbchain); 
 
 
-  free((char *)mridge);
   printf("There are %d chains. \n", id);
   *pnbchain = id;
 

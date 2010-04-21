@@ -179,31 +179,33 @@ void Scwt_phase(double *input, double *Oreal, double *Oimage,
   nbvoice = *pnbvoice;
   inputsize = *pinputsize;
 
-  /* Memory allocations
+  /* Memory allocations  -- 
+    is the original use of calloc significant?? 
+    Using S_alloc to initialize mem, just in case.  note by xian
      ------------------*/
-  if(!(Odreal = (double *)calloc(inputsize*nbvoice*nboctave, sizeof(double))))
+  if(!(Odreal = (double *) S_alloc(inputsize*nbvoice*nboctave, sizeof(double))))
     error("Memory allocation failed for Ri1 in cwt_phase.c \n");
-  if(!(Odimage = (double *)calloc(inputsize*nbvoice*nboctave, sizeof(double))))
+  if(!(Odimage = (double *) S_alloc(inputsize*nbvoice*nboctave, sizeof(double))))
     error("Memory allocation failed for Ii1 in cwt_phase.c \n");
 
-  if(!(Ri1 = (double *)calloc(inputsize, sizeof(double))))
+  if(!(Ri1 = (double *) S_alloc(inputsize, sizeof(double))))
     error("Memory allocation failed for Ri1 in cwt_phase.c \n");
-  if(!(Ii1 = (double *)calloc(inputsize, sizeof(double))))
+  if(!(Ii1 = (double *) S_alloc(inputsize, sizeof(double))))
     error("Memory allocation failed for Ii1 in cwt_phase.c \n");
 
-  if(!(Ii2 = (double *)calloc(inputsize,sizeof(double))))
+  if(!(Ii2 = (double *) S_alloc(inputsize,sizeof(double))))
     error("Memory allocation failed for Ri2 in cwt_phase.c \n");
-  if(!(Ri2 = (double *)calloc(inputsize,sizeof(double))))
-    error("Memory allocation failed for Ri2 in cwt_phase.c \n");
-
-  if(!(Idi2 = (double *)calloc(inputsize,sizeof(double))))
-    error("Memory allocation failed for Ri2 in cwt_phase.c \n");
-  if(!(Rdi2 = (double *)calloc(inputsize,sizeof(double))))
+  if(!(Ri2 = (double *) S_alloc(inputsize,sizeof(double))))
     error("Memory allocation failed for Ri2 in cwt_phase.c \n");
 
-  if(!(Ri = (double *)calloc(inputsize, sizeof(double))))
+  if(!(Idi2 = (double *) S_alloc(inputsize,sizeof(double))))
+    error("Memory allocation failed for Ri2 in cwt_phase.c \n");
+  if(!(Rdi2 = (double *) S_alloc(inputsize,sizeof(double))))
+    error("Memory allocation failed for Ri2 in cwt_phase.c \n");
+
+  if(!(Ri = (double *) S_alloc(inputsize, sizeof(double))))
     error("Memory allocation failed for Ri in cwt_phase.c \n");
-  if(!(Ii = (double *)calloc(inputsize, sizeof(double))))
+  if(!(Ii = (double *) S_alloc(inputsize, sizeof(double))))
     error("Memory allocation failed for Ii in cwt_phase.c \n");
 
   for(i = 0; i < inputsize; i++){
@@ -239,12 +241,6 @@ void Scwt_phase(double *input, double *Oreal, double *Oimage,
   Oimage -= inputsize*nbvoice*nboctave;
   Odimage -= inputsize*nbvoice*nboctave;
 
-  free((char *)Ri2);
-  free((char *)Ri1);
-  free((char *)Ii1);
-  free((char *)Ii2);
-  free((char *)Ri);
-  free((char *)Ii);
 
   /* Normalize the cwt and compute the f function
      --------------------------------------------*/
@@ -295,34 +291,34 @@ void Scwt_squeezed(double *input, double *squeezed_r,
 
   /* Memory allocations
      ------------------*/
-  if(!(Oreal = (double *)calloc(bigsize, sizeof(double))))
+  if(!(Oreal = (double *) S_alloc(bigsize, sizeof(double))))
     error("Memory allocation failed for Ri1 in cwt_phase.c \n");
-  if(!(Oimage = (double *)calloc(bigsize, sizeof(double))))
+  if(!(Oimage = (double *) S_alloc(bigsize, sizeof(double))))
     error("Memory allocation failed for Ii1 in cwt_phase.c \n");
 
-  if(!(Odreal = (double *)calloc(bigsize, sizeof(double))))
+  if(!(Odreal = (double *) S_alloc(bigsize, sizeof(double))))
     error("Memory allocation failed for Ri1 in cwt_phase.c \n");
-  if(!(Odimage = (double *)calloc(bigsize, sizeof(double))))
+  if(!(Odimage = (double *) S_alloc(bigsize, sizeof(double))))
     error("Memory allocation failed for Ii1 in cwt_phase.c \n");
 
-  if(!(Ri1 = (double *)calloc(inputsize, sizeof(double))))
+  if(!(Ri1 = (double *) S_alloc(inputsize, sizeof(double))))
     error("Memory allocation failed for Ri1 in cwt_phase.c \n");
-  if(!(Ii1 = (double *)calloc(inputsize, sizeof(double))))
+  if(!(Ii1 = (double *) S_alloc(inputsize, sizeof(double))))
     error("Memory allocation failed for Ii1 in cwt_phase.c \n");
 
-  if(!(Ii2 = (double *)calloc(inputsize,sizeof(double))))
+  if(!(Ii2 = (double *) S_alloc(inputsize,sizeof(double))))
     error("Memory allocation failed for Ri2 in cwt_phase.c \n");
-  if(!(Ri2 = (double *)calloc(inputsize,sizeof(double))))
-    error("Memory allocation failed for Ri2 in cwt_phase.c \n");
-
-  if(!(Idi2 = (double *)calloc(inputsize,sizeof(double))))
-    error("Memory allocation failed for Ri2 in cwt_phase.c \n");
-  if(!(Rdi2 = (double *)calloc(inputsize,sizeof(double))))
+  if(!(Ri2 = (double *) S_alloc(inputsize,sizeof(double))))
     error("Memory allocation failed for Ri2 in cwt_phase.c \n");
 
-  if(!(Ri = (double *)calloc(inputsize, sizeof(double))))
+  if(!(Idi2 = (double *) S_alloc(inputsize,sizeof(double))))
+    error("Memory allocation failed for Ri2 in cwt_phase.c \n");
+  if(!(Rdi2 = (double *) S_alloc(inputsize,sizeof(double))))
+    error("Memory allocation failed for Ri2 in cwt_phase.c \n");
+
+  if(!(Ri = (double *) S_alloc(inputsize, sizeof(double))))
     error("Memory allocation failed for Ri in cwt_phase.c \n");
-  if(!(Ii = (double *)calloc(inputsize, sizeof(double))))
+  if(!(Ii = (double *) S_alloc(inputsize, sizeof(double))))
     error("Memory allocation failed for Ii in cwt_phase.c \n");
 
   for(i = 0; i < inputsize; i++){
@@ -358,12 +354,6 @@ void Scwt_squeezed(double *input, double *squeezed_r,
   Oimage -= bigsize;
   Odimage -= bigsize;
 
-  free((char *)Ri2);
-  free((char *)Ri1);
-  free((char *)Ii1);
-  free((char *)Ii2);
-  free((char *)Ri);
-  free((char *)Ii);
 
   /* Normalize the cwt and compute the squeezed transform
      ----------------------------------------------------*/

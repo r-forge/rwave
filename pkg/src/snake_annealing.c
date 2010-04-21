@@ -86,13 +86,13 @@ void Ssnake_annealing(double *cost, double *smodulus,
 
   recal = 100000; /* recompute cost function every 'recal' iterations */
 
-  if(!(bcost = (double *)calloc(blocksize,sizeof(double))))
+  if(!(bcost = (double *)S_alloc(blocksize,sizeof(double))))
     error("Memory allocation failed for bcost at snake_annealing.c \n");
 
-  if(!(phi2 = (double *)calloc(sigsize,sizeof(double))))
+  if(!(phi2 = (double *)S_alloc(sigsize,sizeof(double))))
     error("Memory allocation failed for phi2 at snake_annealing.c \n");
 
-  if(!(posmap = (int *)calloc(smodsize * nscale,sizeof(int))))
+  if(!(posmap = (int *)S_alloc(smodsize * nscale,sizeof(int))))
     error("Memory allocation failed for posmap at snake_annealing.c \n");
 
 /*  if(blocksize != 1) {
@@ -300,8 +300,6 @@ void Ssnake_annealing(double *cost, double *smodulus,
 	    for(i=0;i<sigsize;i++) phi[i]=phi2[i];
 	  }*/
 	  snakexpand(rho, sub, snakesize);
-	  free((char *)bcost);
-	  free((char *)posmap);
 	  return;
 	}
       }
@@ -328,8 +326,6 @@ void Ssnake_annealing(double *cost, double *smodulus,
 	  for(i=0;i<sigsize;i++) phi[i]=phi2[i];
 	}*/
 	snakexpand(rho, sub, snakesize);
-	free((char *)bcost);
-	free((char *)posmap);
 	return;
       }
       temperature = c/log(1. + (double)count);

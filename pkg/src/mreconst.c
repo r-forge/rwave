@@ -74,16 +74,16 @@ void signal_position(char *filtername, double **lambda,
   double d;
   int *indx;
 
-  if(!(indx = (int *) malloc(num_of_extrema * sizeof(int))))
+  if(!(indx = (int *) R_alloc(num_of_extrema , sizeof(int))))
     error("Memory allocation failed for indx in signal_position.c \n");
 
   HGfilter_bound(filtername,&H_bound,&G_bound,max_resoln); 
   PsiPhifilter_bound( &psi, &phi, H_bound, G_bound, max_resoln );
 
-  if(!(position_matrix = (double **) malloc(num_of_extrema * sizeof(double *) )))
+  if(!(position_matrix = (double **) R_alloc(num_of_extrema , sizeof(double *) )))
     error("Memory allocation failed for position matrix in image_lambda \n");
   for ( r = 0; r < num_of_extrema; r++ )
-    if(!(position_matrix[r] = (double *) malloc((num_of_extrema) * sizeof(double) )))
+    if(!(position_matrix[r] = (double *) R_alloc((num_of_extrema) , sizeof(double) )))
       error("Memory allocation failed for position_matrix[] in image_lambda \n");
 
   for ( r = 0; r < num_of_extrema; r++ ) {
@@ -106,8 +106,6 @@ void signal_position(char *filtername, double **lambda,
 /*  printf("num_of_extrema = %d \n",num_of_extrema); */
 /*  output_array(position_matrix,num_of_extrema,num_of_extrema,filename); */
 
-  free( phi );
-  free( psi );
 
   /**************************************************/
   /* solve lambda from position_matrix (lambda) = b */
@@ -116,7 +114,7 @@ void signal_position(char *filtername, double **lambda,
   if(!(*lambda = (double *) R_alloc(num_of_extrema , sizeof(double) )))
     error("Memory allocation failed for lambda in image_position.c \n");
 
-  if(!(b = (double *) malloc( num_of_extrema * sizeof(double))))
+  if(!(b = (double *) R_alloc( num_of_extrema , sizeof(double))))
     error("Memory allocation failed for b in image_position.c \n");  
 
 
@@ -136,18 +134,6 @@ void signal_position(char *filtername, double **lambda,
 */
   svdecomp_solve(position_matrix,b,*lambda,num_of_extrema,
 		 num_of_extrema,&w,&v);
-
-  for ( i = 0; i < num_of_extrema; i++ ) {
-    free(position_matrix[i] );
-    free(v[i]); 
-  }
-  free(position_matrix); 
-
-  free(v);
-  free(w);
-  free(b);
-
-  return;
 }
 
 

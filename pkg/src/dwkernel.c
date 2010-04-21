@@ -10,6 +10,7 @@
 /*******************************************************************/
 
 #include "Swave.h"
+#include "dyadic.h"
 
 /****************************************************************
 *  Function: fexp2:
@@ -89,13 +90,13 @@ void signal_K_compute(K,W,max_resoln,np )
   double **grad_W, *k_tilda;
   double fexp2();
 
-  if(!(grad_W = (double **) malloc( (max_resoln+1) * sizeof(double *) )))
+  if(!(grad_W = (double **) R_alloc( (max_resoln+1) , sizeof(double *) )))
     error("Memory allocation failed for grad_pis in K_compute.c \n");
-  if(!(k_tilda = (double *) malloc( np * sizeof(double) )))
+  if(!(k_tilda = (double *) R_alloc( np , sizeof(double) )))
     error("Memory allocation failed for k_tilda in K_compute.c \n");
   
   for(i = 1; i <= max_resoln; i++)
-    if(!(grad_W[i] = (double *)malloc(np * sizeof(double))))
+    if(!(grad_W[i] = (double *)R_alloc(np , sizeof(double))))
       error("Memory allocation failed for grad_W[] in K_compute.c \n");
 
 
@@ -119,10 +120,10 @@ void signal_K_compute(K,W,max_resoln,np )
   /* k_tilda is one dimensional ...                             */
   /**************************************************************/
 
-  if(!((*K)=(double **) malloc( (np+1) * sizeof(double *))))
+  if(!((*K)=(double **) R_alloc( (np+1) , sizeof(double *))))
     error("Memory allocation failed for *k in K_compute.c \n");
   for ( t = 0; t <= np; t++ )
-    if(!((*K)[t] = (double *) malloc( (np+1) * sizeof(double) )))
+    if(!((*K)[t] = (double *) R_alloc( (np+1) , sizeof(double) )))
       error("Memory allocation failed for (*k)[] in K_compute.c \n");
   
   for ( t = 0; t < np; t++ )    {
@@ -136,8 +137,6 @@ void signal_K_compute(K,W,max_resoln,np )
   //for(i = 0; i <= max_resoln; i++)
 //    free( grad_W[i]);
   
-  free(grad_W);
-  free(k_tilda );
 }
 
 /****************************************************************
@@ -153,7 +152,7 @@ void signal_K_compute(K,W,max_resoln,np )
 *
 ****************************************************************/
 
-
+/* please don't write to disk
 void signal_tilda_adjust(tilda,ksize,fname,fsize)
      double **tilda;
      char *fname;
@@ -181,6 +180,7 @@ void signal_tilda_adjust(tilda,ksize,fname,fsize)
   free(tmp);
 }
 
+*/ 
 
 
 

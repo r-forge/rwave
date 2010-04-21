@@ -40,7 +40,7 @@ int max_resoln, np;
 {
   int j;
 
-  *d_phi_range = (bound *) malloc( (max_resoln+1) * sizeof(bound) );
+  *d_phi_range = (bound *) R_alloc( (max_resoln+1) , sizeof(bound) );
   for ( j = 0; j <= max_resoln; j++ )
   {
     (*d_phi_range)[j].lb = (int) ceil((1 - 1.0 / twoto[j]) * (1 - 2*NW));
@@ -61,7 +61,7 @@ int np;
 {
   int j;
 
-  *d_psi_range = (bound *) malloc( (max_resoln+1) * sizeof(bound) );
+  *d_psi_range = (bound *) R_alloc( (max_resoln+1) , sizeof(bound) );
   for ( j = 1; j <= max_resoln; j++ )
   {
     (*d_psi_range)[j].lb = (int) ceil( (double) ((d_phi_range[j-1].lb -1) / 2) );
@@ -85,7 +85,7 @@ int max_resoln;
 
   for ( j = 0; j <= max_resoln; j++ )
   {
-    d_phi[j] = (double *) malloc( d_phi_range[j].size * sizeof(double) );
+    d_phi[j] = (double *) R_alloc( d_phi_range[j].size , sizeof(double) );
 		
     if ( j == 0 )
       for ( k = d_phi_range[j].lb; k <= d_phi_range[j].ub; k++ )
@@ -121,7 +121,7 @@ int max_resoln;
 
   for ( j = 1; j <= max_resoln; j++ )
   {
-    d_psi[j] = (double *) malloc( d_psi_range[j].size * sizeof( double ) );
+    d_psi[j] = (double *) R_alloc( d_psi_range[j].size , sizeof( double ) );
 		
     for ( k = d_psi_range[j].lb; k <= d_psi_range[j].ub; k++ )
     {
@@ -228,9 +228,9 @@ int *np_ptr;
   compute_a();
   init_twoto( max_resoln );
 
-  d_psi_range = (bound *) malloc( num_of_resoln * sizeof(bound) );
-  d_phi = (double **) malloc( num_of_resoln * sizeof(double *) );
-  d_psi = (double **) malloc( num_of_resoln * sizeof(double *) );
+  d_psi_range = (bound *) R_alloc( num_of_resoln , sizeof(bound) );
+  d_phi = (double **) R_alloc( num_of_resoln , sizeof(double *) );
+  d_psi = (double **) R_alloc( num_of_resoln , sizeof(double *) );
 
   init_phi_array( &phi_array, max_resoln );
   init_psi_array( &psi_array, max_resoln );
@@ -244,22 +244,6 @@ int *np_ptr;
   phi_reconstruction( phi, d_phi, phi_array, d_phi_range, max_resoln, np );
   psi_reconstruction( psi, d_psi, psi_array, d_psi_range, max_resoln, np );
 
-  free( twoto );
-  free( phi_array );
-  free( psi_array );
-  free( d_phi_range );
-  free( d_psi_range );
-  for ( j = 0; j <= max_resoln; j++ )
-    free( d_phi[j] );
-  free( d_phi );
-  for ( j = 1; j <= max_resoln; j++ )
-    free( d_psi[j] );
-  free( d_psi );
-
-  free( a );
-  for ( j = NMIN; j < NMAX + 1; j++ )
-    free( c[j] );
-  free( c );
 }
 
 /****************************************************************************/
@@ -279,7 +263,7 @@ int max_resoln;
   int j;
   int temp = 2*NW-1;
 
-  *dH_bound = (bound *) malloc( max_resoln * sizeof(bound) );
+  *dH_bound = (bound *) R_alloc( max_resoln , sizeof(bound) );
 
   for ( j = 0; j < max_resoln; j++ )
   {
@@ -305,7 +289,7 @@ int max_resoln;
   int j;
   int temp = 2 - 2*NW;
 
-  *dG_bound = (bound *) malloc( max_resoln * sizeof(bound) );
+  *dG_bound = (bound *) R_alloc( max_resoln , sizeof(bound) );
 
   for ( j = 0; j < max_resoln; j++ )
   {
@@ -331,10 +315,10 @@ int max_resoln;
 {
   int j, i;
 
-  *dH = (double **) malloc( max_resoln * sizeof(double *) );
+  *dH = (double **) R_alloc( max_resoln , sizeof(double *) );
   for ( j = 0; j < max_resoln; j++ )
   {
-    (*dH)[j] = (double *) malloc( dH_bound[j].size * sizeof(double) );
+    (*dH)[j] = (double *) R_alloc( dH_bound[j].size , sizeof(double) );
     if ( j == 0 )
     {
       for ( i = 0; i < dH_bound[j].size; i++ )
@@ -368,10 +352,10 @@ int max_resoln;
 {
   int j, i, n;
 
-  *dG = (double **) malloc( max_resoln * sizeof(double *) );
+  *dG = (double **) R_alloc( max_resoln , sizeof(double *) );
   for ( j = 0; j < max_resoln; j++ )
   {
-    (*dG)[j] = (double *) malloc( dG_bound[j].size * sizeof(double) );
+    (*dG)[j] = (double *) R_alloc( dG_bound[j].size , sizeof(double) );
     if ( j == 0 )
     { 
       for ( i = 0, n = 2-2*NW; i < dG_bound[j].size; i++, n++ )
@@ -410,7 +394,7 @@ int *NW_ptr;
 
   bound *dH_bound, *dG_bound;
   double **dH, **dG;
-  double *sym = (double *) malloc( 2*np * sizeof(double) );
+  double *sym = (double *) R_alloc( 2*np , sizeof(double) );
   int j, n, k, t;
   double sum;
 
@@ -452,19 +436,5 @@ int *NW_ptr;
     }
   }
 
-  free( twoto );
-  free( sym );
-  free( dH_bound );
-  free( dG_bound );
-  for ( j = 0; j < max_resoln; j++ )
-  {
-    free( dH[j] );
-    free( dG[j] );
-  }
-  free( dH );
-  free( dG );
-  for ( j = NMIN; j < NMAX + 1; j++ )
-    free( c[j] );
-  free( c );
 }
 

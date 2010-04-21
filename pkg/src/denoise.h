@@ -43,7 +43,7 @@ void four1(double data[],int nn,int isign);
 
 /* In cwt_maxima.c
    ---------------*/
-void Scwt_gmax(double *input, double *output, int *pnrow, int *pncol);
+void Scwt_gmax(double *input, double *output, int *pnrow, int *pncol, int *posvector);
 
 void Scwt_mridge(double *input, double *output, int *pnrow, int *pncol);
 
@@ -82,8 +82,10 @@ void multi(double *Ri1, double *Ii1, double *Ri2, double *Or,
 
 void morlet_frequency(double cf,double scale,double *w,int isize);
 
-void morlet_time(double *pcf,double *pscale, int *pb, 
-		 fcomplex *w,int *pisize);
+void morlet_time(double *pcf, double *pscale, int *pb, 
+		 double *w_r, double *w_i, int *pisize);
+//void morlet_time(double *pcf, double *pscale, int *pb, 
+//		 fcomplex *w, int *pisize);
 
 void vmorlet_time(double *pcf,double *pscale, int *b, 
 		 double *w_r, double *w_i,int *pisize, int *pnbnode);

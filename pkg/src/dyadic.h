@@ -30,13 +30,20 @@ typedef struct
 } image_ext;
 
 
+
+/* in choldc.c
+   ------- */
+void double_choldc(double **a, int n, double p[]);
+void cholsl(double **a, int n, double p[], double b[], double x[]);
+void choldc(double **a, int n, double p[]);
+
 /* in mw.c
    ------- */
 void Sf_compute(double *Sf,double *f,int *max_resoln_ptr,
-  int *np_ptr,char **pfiltername);
+  int *np_ptr,char *filtername);
 
 void Wf_compute(double *Wf, double *Sf, int *max_resoln_ptr,
-  int *np_ptr, char **pfiltername);
+  int *np_ptr, char *filtername);
 
 
 
@@ -84,10 +91,16 @@ void signal_W_hat_S_hat(double ***W_hat, double ***S_hat,
 /* in dwvector.c
    ------------- */
 void compute_convolution(double *s, double *f, double *g, int np );
+void signal_zero( double *input, int size);
+void signal_copy( double *input, double *output, int size, int offset);
+void complex_product( double *product, double *s1, double *s2, int np);
+
+
 
 
 /* in dwfileio.c
-   ------------- */
+please don't write to disk
+   ------------- 
 void input_signal(char *fname, double **Pic, int size);
 
 void init_filename(char filename[]);
@@ -101,7 +114,7 @@ void filename_inc(char filename[], int inc);
 void output_signal(double *s, int np, char *fname);
 
 void output_array(double **array, int nrow, int ncol, char *file_name );
-
+*/
 
 
 /* in extrema.c
@@ -173,7 +186,10 @@ void wavelet_transform_gradient(double **grad, double **s,
 void signal_K_compute(double ***K, double **W, int max_resoln,
   int np );
 
+/* please don't write to disk
 void signal_tilda_adjust(double **tilda, int ksize, char *fname,
   int fsize);
+*/
+
 
 

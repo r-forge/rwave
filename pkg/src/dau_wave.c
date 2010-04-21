@@ -47,9 +47,9 @@ int open_read()
   int n;
   int i,j;
 
-  c = (double **)malloc(NMAXPLUS1*sizeof(double *));
+  c = (double **)R_alloc(NMAXPLUS1,sizeof(double *));
   for (n=NMIN;n<NMAX+1;n++)
-    c[n] = (double *)malloc(2*n*sizeof(double));
+    c[n] = (double *)R_alloc(2*n,sizeof(double));
 
   c[2][0] =  .482962913145;  c[2][1] = .836516303738;   c[2][2] = .224143868042;    
   c[2][3] = -.129409522551;    
@@ -112,17 +112,16 @@ int compute_a()
   double *tmpa;
 
   taille = 0;
-  a = (double *)malloc((1+taille)*sizeof(double)); 
+  a = (double *)R_alloc((1+taille),sizeof(double)); 
   for (i=0;i<1+taille;i++)
     a[i] = 1;
   for(ii=0 ; ii < NITER ; ii++)
   {
-    tmpa = (double *)malloc((1+taille)*sizeof(double)); 
+    tmpa = (double *)R_alloc((1+taille),sizeof(double)); 
     for (i=0;i<1+taille;i++)
       tmpa[i] = a[i];
     taille = 2 * taille + 2 * NW -1;		
-    free(a);
-    a = (double *)malloc((1+taille)*sizeof(double)); 
+    a = (double *)R_alloc((1+taille),sizeof(double)); 
     for (i=0;i<1+taille;i++)
     { 
       a[i] = 0;
@@ -131,7 +130,6 @@ int compute_a()
  	  a[i] += c[NW][i-2*j] * tmpa[j];
  	  a[i] *= SQR2;
     }
-    free(tmpa);
   }	
 }
 
@@ -180,7 +178,7 @@ int max_resoln;
 {
   int j;
 
-  twoto = (int *) malloc((max_resoln+1) * sizeof(int));
+  twoto = (int *) R_alloc((max_resoln+1) , sizeof(int));
   twoto[0] = 1;
   for ( j = 1; j <= max_resoln; j++ )
     twoto[j] = 2*twoto[j-1];
@@ -199,7 +197,7 @@ int max_resoln;
   double arg;
   int i;
 
-  *phi_array = (double *) malloc( array_size * sizeof(double) );  
+  *phi_array = (double *) R_alloc( array_size , sizeof(double) );  
   for ( arg = 0.0, i = 0; i < array_size; arg += inc, i++ )
     (*phi_array)[i] = (double) phi( arg );
 }
@@ -217,7 +215,7 @@ int max_resoln;
   double arg;
   int i;
 
-  *psi_array = (double *) malloc( array_size * sizeof(double) );  
+  *psi_array = (double *) R_alloc( array_size , sizeof(double) );  
   for ( arg = 0.0, i = 0; i < array_size; arg += inc, i++ )
     (*psi_array)[i] = (double) Psi( arg - NW );
 }

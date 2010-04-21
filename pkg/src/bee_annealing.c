@@ -66,9 +66,9 @@ void Sbee_annealing(double *smodulus, double *beemap,
   seed = *pseed;
   idum = (long)seed;
 
-  if(!(a = (int *)malloc(sizeof(int) * iteration)))
+  if(!(a = (int *) R_alloc(iteration, sizeof(int) )))
     error("Memory allocation failed for a in bee_annealing.c \n");
-  if(!(b = (int *)malloc(sizeof(int) * iteration)))
+  if(!(b = (int *) R_alloc(iteration, sizeof(int) )))
     error("Memory allocation failed for b in bee_annealing.c \n");
   
 

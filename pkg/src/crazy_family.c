@@ -57,7 +57,7 @@ void Scrazy_family(double *ridgemap,double *orderedmap,int *chain,
   sigsize = *psigsize;
   nbchain = *pnbchain;
 
-  if(!(mridge = (double *)calloc(sigsize * nscale, sizeof(double))))
+  if(!(mridge = (double *)S_alloc(sigsize * nscale, sizeof(double))))
     error("Memory allocation failed for mridge in crazy_family.c \n");
 
 
@@ -163,7 +163,6 @@ void Scrazy_family(double *ridgemap,double *orderedmap,int *chain,
   reordering(chain, sigsize, nbchain);
 
 
-  free((char *)mridge);
   printf("There are %d chains. \n", id);
   *pnbchain = id;
 

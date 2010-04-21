@@ -50,8 +50,8 @@ void splridge(int rate, double *y, int n, double *yy)
   double p,qn,sig,un,*u,yp1,ypn,a,b,h;
   double *y2;
   
-  u=(double *)calloc(n-1,sizeof(double));
-  y2=(double *)calloc(n,sizeof(double));
+  u=(double *)S_alloc(n-1,sizeof(double));
+  y2=(double *)S_alloc(n,sizeof(double));
   yp1 = ypn =0;
   
   if (yp1 > 0.99e30)

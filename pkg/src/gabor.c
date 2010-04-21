@@ -77,20 +77,20 @@ void Sgabor(double *input,double *Oreal,double *Oimage,int *pnbfreq,
 
 
 
-  if(!(Ri1 = (double *)calloc(inputsize, sizeof(double))))
+  if(!(Ri1 = (double *)S_alloc(inputsize, sizeof(double))))
     error("Memory allocation failed for Ri1 in gabor.c \n");
-  if(!(Ii1 = (double *)calloc(inputsize, sizeof(double))))
+  if(!(Ii1 = (double *)S_alloc(inputsize, sizeof(double))))
     error("Memory allocation failed for Ii1 in gabor.c \n");
 
-  if(!(Ii2 = (double *)calloc(inputsize,sizeof(double))))
+  if(!(Ii2 = (double *)S_alloc(inputsize,sizeof(double))))
     error("Memory allocation failed for Ri2 in gabor.c \n");
-  if(!(Ri2 = (double *)calloc(inputsize,sizeof(double))))
+  if(!(Ri2 = (double *)S_alloc(inputsize,sizeof(double))))
     error("Memory allocation failed for Ri2 in gabor.c \n");
 
 
-  if(!(Ri = (double *)calloc(inputsize, sizeof(double))))
+  if(!(Ri = (double *)S_alloc(inputsize, sizeof(double))))
     error("Memory allocation failed for Ri in gabor.c \n");
-  if(!(Ii = (double *)calloc(inputsize, sizeof(double))))
+  if(!(Ii = (double *)S_alloc(inputsize, sizeof(double))))
     error("Memory allocation failed for Ii in gabor.c \n");
 
   for(i = 0; i < inputsize; i++){
@@ -116,14 +116,6 @@ void Sgabor(double *input,double *Oreal,double *Oimage,int *pnbfreq,
 
   Oreal -= inputsize*nbfreq;
   Oimage -= inputsize*nbfreq;
-
-  free((char *)Ri2);
-  free((char *)Ri1);
-  free((char *)Ii1);
-  free((char *)Ii2);
-  free((char *)Ri);
-  free((char *)Ii);
-
 
 }
 
@@ -162,20 +154,20 @@ void Svgabor(double *input,double *Oreal,double *Oimage,double *pfreq,
 
 
 
-  if(!(Ri1 = (double *)calloc(inputsize, sizeof(double))))
+  if(!(Ri1 = (double *)S_alloc(inputsize, sizeof(double))))
     error("Memory allocation failed for Ri1 in gabor.c \n");
-  if(!(Ii1 = (double *)calloc(inputsize, sizeof(double))))
+  if(!(Ii1 = (double *)S_alloc(inputsize, sizeof(double))))
     error("Memory allocation failed for Ii1 in gabor.c \n");
 
-  if(!(Ii2 = (double *)calloc(inputsize,sizeof(double))))
+  if(!(Ii2 = (double *)S_alloc(inputsize,sizeof(double))))
     error("Memory allocation failed for Ri2 in gabor.c \n");
-  if(!(Ri2 = (double *)calloc(inputsize,sizeof(double))))
+  if(!(Ri2 = (double *)S_alloc(inputsize,sizeof(double))))
     error("Memory allocation failed for Ri2 in gabor.c \n");
 
 
-  if(!(Ri = (double *)calloc(inputsize, sizeof(double))))
+  if(!(Ri = (double *)S_alloc(inputsize, sizeof(double))))
     error("Memory allocation failed for Ri in gabor.c \n");
-  if(!(Ii = (double *)calloc(inputsize, sizeof(double))))
+  if(!(Ii = (double *)S_alloc(inputsize, sizeof(double))))
     error("Memory allocation failed for Ii in gabor.c \n");
 
   for(i = 0; i < inputsize; i++){
@@ -193,14 +185,6 @@ void Svgabor(double *input,double *Oreal,double *Oimage,double *pfreq,
   gabor_frequency(scale,frequency,Ri2,inputsize); 
   multiply(Ri1,Ii1,Ri2,Ii2,Oreal,Oimage,inputsize);
   double_fft(Oreal,Oimage,Oreal,Oimage,inputsize,1); 
-
-
-  free((char *)Ri2);
-  free((char *)Ri1);
-  free((char *)Ii1);
-  free((char *)Ii2);
-  free((char *)Ri);
-  free((char *)Ii);
 
 
 }
