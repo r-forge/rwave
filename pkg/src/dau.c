@@ -6,6 +6,7 @@
 #include "dau_wave.h"
 #include "pvalue.h"
 #include "dyadic.h"
+#include "Swave.h"
 
 
 /******************************************************************
