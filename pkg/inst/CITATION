@@ -1,0 +1,18 @@
+citHeader("To cite package 'Rwave' in publications use:")
+
+desc <- packageDescription("Rwave")
+year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", desc$Date)
+vers <- paste("R package version", desc$Version)
+
+citEntry(entry="Manual",
+         title = "Rwave: Time-frequency analysis of {1-D} signals",
+         author = personList(as.person("Brandon Whitcher"),
+                             as.person("Christian Gunning")),
+         year = year,
+         note = vers,
+
+         textVersion =
+         paste("Brandon Whitcher and Christian Gunning (",
+               year,
+               "). Rwave: Time-frequency analysis of 1-D signals. ",
+               vers, ".", sep=""))
