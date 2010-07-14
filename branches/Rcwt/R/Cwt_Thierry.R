@@ -64,7 +64,7 @@ cwtTh <- function(input, noctave, nvoice = 1, moments,
            as.integer(nvoice),
            as.integer(newsize),
            as.integer(moments),
-           PACKAGE="Rwave")
+           PACKAGE="Rcwt")
 
    Routput <- z$Rtmp
    Ioutput <- z$Itmp
@@ -131,7 +131,7 @@ vwtTh <- function(input, scale, moments)
            as.double(scale),
            as.integer(newsize),
            as.integer(moments),
-           PACKAGE="Rwave")
+           PACKAGE="Rcwt")
 
    Routput <- z$Rtmp
    Ioutput <- z$Itmp

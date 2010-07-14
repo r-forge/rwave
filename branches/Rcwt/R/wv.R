@@ -57,7 +57,7 @@ WV <- function(input, nvoice, freqstep = (1/nvoice), plot = TRUE)
           as.integer(nvoice),
           as.double(freqstep),
           as.integer(newsize),
-          PACKAGE="Rwave")
+          PACKAGE="Rcwt")
   
   Routput <- z$Rtmp
   Ioutput <- z$Itmp

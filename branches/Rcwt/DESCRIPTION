@@ -1,14 +1,14 @@
-Package: Rwave
-Version: 1.25-1
-Date: 2010-04-16
-Title: Time-Frequency analysis of 1-D signals
+Package: Rcwt
+Version: 0.1
+Date: 2010-07-13
+Title: Continuous Wavelet Transforms of 1-D signals
 Author: S original by Rene Carmona <rcarmona@princeton.edu> and
   Bruno Torresani <bruno.torresani@cmi.univ-mrs.fr>;
   R port by Brandon Whitcher <bjw34032@users.sourceforge.net>
-Maintainer: Brandon Whitcher <bjw34032@users.sourceforge.net> and 
-  Christian Gunning <xian@unm.edu>
-Depends: R (>= 2.6.0)
-Description: Rwave is a library of R functions which provide an
+  Reduction by Christian Gunning <xian@unm.edu>
+Maintainer: Christian Gunning <xian@unm.edu>
+Depends: R (>= 2.10.0)
+Description: Rcwt is (mostly) a subset of Rwave.  Rwave is a library of R functions which provide an
   environment for the Time-Frequency analysis of 1-D signals (and
   especially for the wavelet and Gabor transforms of noisy signals).
   It was originally written for Splus by Rene Carmona, Bruno Torresani,
@@ -20,4 +20,4 @@ Description: Rwave is a library of R functions which provide an
   an Implementation in S", by Rene Carmona, Wen L. Hwang and Bruno
   Torresani, Academic Press, 1998.
 License: GPL (>= 2)
-URL: http://www.orfe.princeton.edu/~rcarmona/TFbook/tfbook.html, http://r-forge.r-project.org/projects/rwave/
+URL: http://r-forge.r-project.org/projects/rwave/

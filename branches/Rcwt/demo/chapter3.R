@@ -64,7 +64,7 @@ mycgt <- function (input, nvoice, freqstep = (1/nvoice),
   dim(input) <- c(newsize, 1)
   z <- .C("Sgabor", as.double(input), Rtmp = as.double(Routput), 
           Itmp = as.double(Ioutput), as.integer(nvoice), as.double(freqstep), 
-          as.integer(newsize), as.double(scale), PACKAGE="Rwave")
+          as.integer(newsize), as.double(scale), PACKAGE="Rcwt")
   Routput <- z$Rtmp
   Ioutput <- z$Itmp
   dim(Routput) <- c(newsize, pp)
