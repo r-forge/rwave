@@ -11,64 +11,6 @@
 #include "Swave.h"
 #include "denoise.h"
 
-
-
-void WV_mult(int n, double *Ri,double *Ii,
-  double *Ro, double *Io,int isize);
-
-/***********************************************************
-*  Function: freq_parity
-*  ---------
-*          Parity transformation
-*
-*   frequency: value of the frequency parameter (double)
-*   win: input signal
-*   wout: transformed signal
-*   isize: signal size
-*
-************************************************************/
-void freq_parity(double frequency,double *win,double *wout,
-  int isize,int sign)
-{
-  int i,itmp;
-  
-  for(i = 0; i < isize; i++) {
-    itmp = ((int)rint(2*frequency*isize)-i +isize)%isize;
-    wout[i] = win[itmp]*sign;
-  }
-  return;
-}
-
-
-
-/***********************************************************
-*  Function: WV_freq_mult
-*  ---------
-*          Fourier domain manipulation for Wigner-Ville
-*
-*   frequency: value of the frequency parameter (double)
-*   Ri,Ii: input signal (real and imag. parts)
-*   Ro,Io: output signal (real and imag. parts)
-*   isize: signal size
-*
-************************************************************/
-void WV_freq_mult(double frequency,double *Ri,double *Ii,
-  double *Ro, double *Io,int isize)
-{
-  int i,itmp,jtmp;
-  
-  for(i = 0; i < isize; i++) {
-    itmp = ((int)rint(frequency*isize) - i + 2*isize)%isize;
-    jtmp = ((int)rint(frequency*isize) + i + 2*isize)%isize;
-    Ro[i] = Ri[itmp] * Ri[jtmp] + Ii[itmp] * Ii[jtmp];
-    Io[i] = -Ri[itmp] * Ii[jtmp] + Ii[itmp] * Ri[jtmp];
-  }
-  return;
-}
-
-
-
-
 /***********************************************************
 *  Function: WV_mult
 *  ---------

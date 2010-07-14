@@ -41,65 +41,6 @@ void thierry_frequency(int M,double scale,double *w,int isize)
 }
 
 
-/*****************************************************************
-*  function:  Scwt_thierry_r
-*    Continuous wavelet transform :
-*
-*   input: (real-valued) input signal
-*   Ri1, Ii1: Fourier transform of input signal (real and
-*      imaginary parts).
-*   Ri2: Real part of Fourier transform of Morlet wavelet
-*   Oreal,Oimage: real and imaginary parts of CWT
-*   pinputsize: signal size
-*   pnboctave: number of scales (powers of 2)
-*   pnvoice: number of scales between 2 consecutive powers of 2
-*   pcenterfrequency: centralfrequency of Morlet wavelet
-******************************************************************/
-
-void Scwt_thierry_r(double *input, double *Oreal, double *Oimage,
-   int *pnboctave, int *pnbvoice, int *pinputsize, int *pM)
-{	
-  int nboctave, nbvoice, i, j, inputsize, M;
-  double a;
-  double *Ri2, *Ri1, *Ii1, *Ii, *Ri;
-
-
-  M= *pM;
-  nboctave = *pnboctave;
-  nbvoice = *pnbvoice;
-  inputsize = *pinputsize;
-  if(!(Ri2 = (double *) R_alloc(inputsize, sizeof(double))))
-    error("Memory allocation failed for Ri2 in cwt_morlet.c \n");
-  if(!(Ri1 = (double *) R_alloc(inputsize, sizeof(double) )))
-    error("Memory allocation failed for Ri1 in cwt_morlet.c \n");
-  if(!(Ii1 = (double *) R_alloc(inputsize, sizeof(double) )))
-    error("Memory allocation failed for Ii1 in cwt_morlet.c \n");
-  if(!(Ri = (double *) R_alloc(inputsize, sizeof(double) )))
-    error("Memory allocation failed for Ri in cwt_morlet.c \n");
-  if(!(Ii = (double *) R_alloc(inputsize, sizeof(double) )))
-    error("Memory allocation failed for Ii in cwt_morlet.c \n");
-
-  for(i = 0; i < inputsize; i++) {
-    Ri[i] = (double)input[i]; 
-    Ii[i] = 0.0;
-  }
-
-  double_fft(Ri1,Ii1,Ri,Ii,inputsize,-1);   
-  
-  for(i = 1; i <= nboctave; i++) {
-    for(j=0; j < nbvoice; j++) {
-      a = (double)(pow((double)2,(double)(i+j/((double)nbvoice))));
-      thierry_frequency(M,a,Ri2,inputsize); 
-      multi(Ri1,Ii1,Ri2,Oreal,Oimage,inputsize);
-      double_fft(Oreal,Oimage,Oreal,Oimage,inputsize,1); 
-      Oreal = Oreal + inputsize;
-      Oimage = Oimage + inputsize;  
-    }
-  }
-}
-
-
-
 
 /*****************************************************************
 *  function:  Scwt_thierry
