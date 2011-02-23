@@ -1,6 +1,13 @@
 NEWS for Rwave package
 ======================
 
+
+1.25-2  2011-02-22 
+    o   Last planned update.  A C++ rewrite of core functionality is in the works.
+        Please contact Christian Gunning if you'd like to contribute.
+
+    o   Added some documentation.
+
 1.25-1  2010-04-20 
     o   Beginning to move legacy C code to internal R functionality.  
         Risk of memory leaks should be lower now.

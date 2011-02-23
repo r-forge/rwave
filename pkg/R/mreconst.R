@@ -39,6 +39,8 @@ mrecons <- function(extrema, filtername="Gaussian1", readflag=FALSE)
 
   if(2^maxresoln > np)
     stop("The support of the coarsest scale filter is bigger than signal size")
+  if(readflag)
+    stop("readflag = T not supported in Rwave.  See source for details.")
   if((readflag && (maxresoln > 9)) || (np > 4096))
     stop("Can not use readflag")
 

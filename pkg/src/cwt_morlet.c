@@ -51,15 +51,12 @@ void multi(double *Ri1, double *Ii1, double *Ri2, double *Or,
 *   isize: window size
 *   cf: central frequency of the wavelet
 ***************************************************************/
-
 void morlet_frequency(double cf,double scale,double *w,int isize)
 {
   double tmp, tmp1=0;
   int i;
   double twopi;
-
   twopi = 6.28318530717959;
-  
 /*  tmp1 = exp(-(cf  * cf)/2); */
   for(i = 0; i < isize; i++) {
     tmp = (double)(scale * i * twopi/isize - cf);

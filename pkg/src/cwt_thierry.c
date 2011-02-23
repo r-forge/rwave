@@ -204,7 +204,6 @@ void Svwt_thierry(double *Rinput,double *Iinput,double *Oreal,
   }
 
   double_fft(Ri1,Ii1,Ri,Ii,inputsize,-1);   
-  
   thierry_frequency(M,a,Ri2,inputsize); 
   multi(Ri1,Ii1,Ri2,Oreal,Oimage,inputsize);
   double_fft(Oreal,Oimage,Oreal,Oimage,inputsize,2); 

@@ -18,7 +18,7 @@ the extrema representation.
 filter used for dyadic wavelet transform.
 }
 \item{readflag}{
-if set to T, read reconstruction kernel from precomputed file.
+if set to T, read reconstruction kernel from precomputed file.  This is not supported in the current package, and will cause an error.
 }}
 \value{
 Structure containing
